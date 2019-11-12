@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>【django】---1.使用scrapy框架高效爬取汽车之家图片 | Completion is more important than perfection</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="使用scrapy框架完成图片的爬取 一、项目基础配置创建项目123scrapy startproject BmwImagescd BmwImagesscrapy genspider bmwSpider car.autohome.com.cn  修改基础配置123* settings中ROBOTSTXT_OBEY* DEFAULT_REQUEST_HEADERS* USER_AGENT  增加sta">
+<meta name="keywords" content="python,scrapy,makedown">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【django】---1.使用scrapy框架高效爬取汽车之家图片">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;12&#x2F;%E3%80%90django%E3%80%91---1.%E4%BD%BF%E7%94%A8scrapy%E6%A1%86%E6%9E%B6%E9%AB%98%E6%95%88%E7%88%AC%E5%8F%96%E6%B1%BD%E8%BD%A6%E4%B9%8B%E5%AE%B6%E5%9B%BE%E7%89%87&#x2F;index.html">
+<meta property="og:site_name" content="Completion is more important than perfection">
+<meta property="og:description" content="使用scrapy框架完成图片的爬取 一、项目基础配置创建项目123scrapy startproject BmwImagescd BmwImagesscrapy genspider bmwSpider car.autohome.com.cn  修改基础配置123* settings中ROBOTSTXT_OBEY* DEFAULT_REQUEST_HEADERS* USER_AGENT  增加sta">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-11-12T12:37:55.111Z">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Completion is more important than perfection" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Completion is more important than perfection</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">David Xiang</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-【django】---1.使用scrapy框架高效爬取汽车之家图片" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/12/%E3%80%90django%E3%80%91---1.%E4%BD%BF%E7%94%A8scrapy%E6%A1%86%E6%9E%B6%E9%AB%98%E6%95%88%E7%88%AC%E5%8F%96%E6%B1%BD%E8%BD%A6%E4%B9%8B%E5%AE%B6%E5%9B%BE%E7%89%87/" class="article-date">
+  <time datetime="2019-11-12T12:41:41.587Z" itemprop="datePublished">2019-11-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      【django】---1.使用scrapy框架高效爬取汽车之家图片
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>使用scrapy框架完成图片的爬取</p>
+<h2 id="一、项目基础配置"><a href="#一、项目基础配置" class="headerlink" title="一、项目基础配置"></a>一、项目基础配置</h2><h3 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">scrapy startproject BmwImages</span><br><span class="line"><span class="built_in">cd</span> BmwImages</span><br><span class="line">scrapy genspider bmwSpider car.autohome.com.cn</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改基础配置"><a href="#修改基础配置" class="headerlink" title="修改基础配置"></a>修改基础配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">* settings中ROBOTSTXT_OBEY</span><br><span class="line">* DEFAULT_REQUEST_HEADERS</span><br><span class="line">* USER_AGENT</span><br></pre></td></tr></table></figure>
+
+<h3 id="增加start-py启动爬虫文件"><a href="#增加start-py启动爬虫文件" class="headerlink" title="增加start.py启动爬虫文件"></a>增加start.py启动爬虫文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">from scrapy import cmdline</span><br><span class="line">cmdline.execute(<span class="string">"scrapy crawl bmwSpider"</span>.split())</span><br></pre></td></tr></table></figure>
+
+<h2 id="二、爬取图片数据"><a href="#二、爬取图片数据" class="headerlink" title="二、爬取图片数据"></a>二、爬取图片数据</h2><h3 id="获取图片类别名称和urls列表"><a href="#获取图片类别名称和urls列表" class="headerlink" title="获取图片类别名称和urls列表"></a>获取图片类别名称和urls列表</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> scrapy</span><br><span class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> parse</span><br><span class="line"><span class="keyword">from</span> BmwImages.items <span class="keyword">import</span> BmwimagesItem</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BmwspiderSpider</span><span class="params">(scrapy.Spider)</span>:</span></span><br><span class="line">    name = <span class="string">'bmwSpider'</span></span><br><span class="line">    allowed_domains = [<span class="string">'car.autohome.com.cn'</span>]</span><br><span class="line">    start_urls = [<span class="string">'https://car.autohome.com.cn/pic/series/66.html'</span>]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse</span><span class="params">(self, response)</span>:</span></span><br><span class="line">        uiboxs = response.xpath(<span class="string">"//div[@class='uibox']"</span>)[<span class="number">1</span>:]</span><br><span class="line">        <span class="keyword">for</span> uibox <span class="keyword">in</span> uiboxs:</span><br><span class="line">            category = uibox.xpath(<span class="string">".//div[@class='uibox-title']/a/text()"</span>).get()</span><br><span class="line">            urls = uibox.xpath(<span class="string">".//div//ul/li/a/img/@src"</span>).getall()</span><br><span class="line">            image_urls = list(map(<span class="keyword">lambda</span> x:parse.urljoin(response.url,x.replace(<span class="string">"240x180_0_q95_c42_"</span>,<span class="string">""</span>)),urls))</span><br><span class="line">            item = BmwimagesItem(category=category,image_urls=image_urls)</span><br><span class="line">            <span class="keyword">yield</span> item</span><br></pre></td></tr></table></figure>
+
+<h3 id="设置图片管道下载"><a href="#设置图片管道下载" class="headerlink" title="设置图片管道下载"></a>设置图片管道下载</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">import scrapy</span><br><span class="line"></span><br><span class="line">class BmwimagesItem(scrapy.Item):</span><br><span class="line">    category = scrapy.Field()</span><br><span class="line">    image_urls = scrapy.Field()</span><br><span class="line">    images = scrapy.Field()</span><br></pre></td></tr></table></figure>
+
+<h3 id="settings-py代码"><a href="#settings-py代码" class="headerlink" title="settings.py代码"></a>settings.py代码</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import os</span><br><span class="line"></span><br><span class="line">ITEM_PIPELINES = &#123;</span><br><span class="line">   <span class="comment"># 'BmwImages.pipelines.BmwimagesPipeline': 300,</span></span><br><span class="line">  <span class="string">'scrapy.pipelines.images.ImagesPipeline'</span>: 1</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">IMAGES_STORE = os.path.join(os.path.dirname(os.path.dirname(__file__)),<span class="string">'images'</span>)</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="重写方法设置目录"><a href="#重写方法设置目录" class="headerlink" title="重写方法设置目录"></a>重写方法设置目录</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> scrapy.pipelines.images <span class="keyword">import</span> ImagesPipeline</span><br><span class="line"><span class="keyword">from</span> BmwImages <span class="keyword">import</span> settings</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BmwImagesPipeline</span><span class="params">(ImagesPipeline)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 请求下载之前调用 发送下载请求</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_media_requests</span><span class="params">(self, item, info)</span>:</span></span><br><span class="line">        request_objs = super(BmwImagesPipeline,self).get_media_requests(item, info)</span><br><span class="line">        <span class="keyword">for</span> request_obj <span class="keyword">in</span> request_objs:</span><br><span class="line">            request_obj.item = item</span><br><span class="line">        <span class="keyword">return</span> request_objs</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 请求之后调用 图片将要被存储时调用获取路径</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">file_path</span><span class="params">(self, request, response=None, info=None)</span>:</span></span><br><span class="line">        path = super(BmwImagesPipeline, self).file_path(request, response, info)</span><br><span class="line">        category = request.item.get(<span class="string">'category'</span>)</span><br><span class="line">        image_store = settings.IMAGES_STORE</span><br><span class="line">        category_path = os.path.join(image_store,category)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(category_path):</span><br><span class="line">            os.mkdir(category_path)</span><br><span class="line"></span><br><span class="line">        image_name = path.replace(<span class="string">"full/"</span>,<span class="string">""</span>)</span><br><span class="line">        image_path = os.path.join(category_path,image_name)</span><br><span class="line">        <span class="keyword">return</span> image_path</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用crawlSpider进行改进，爬取更多图片"><a href="#使用crawlSpider进行改进，爬取更多图片" class="headerlink" title="使用crawlSpider进行改进，爬取更多图片"></a>使用crawlSpider进行改进，爬取更多图片</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line">import scrapy</span><br><span class="line">from urllib import parse</span><br><span class="line">from BmwImages.items import BmwimagesItem</span><br><span class="line">from scrapy.spiders import CrawlSpider, Rule</span><br><span class="line">from scrapy.linkextractors import LinkExtractor</span><br><span class="line"></span><br><span class="line">class BmwspiderSpider(CrawlSpider):</span><br><span class="line">    name = <span class="string">'bmwCrawlSpider'</span></span><br><span class="line">    allowed_domains = [<span class="string">'car.autohome.com.cn'</span>]</span><br><span class="line">    start_urls = [<span class="string">'https://car.autohome.com.cn/pic/series/66.html'</span>]</span><br><span class="line"></span><br><span class="line">    rules = &#123;</span><br><span class="line">        Rule(LinkExtractor(allow=r<span class="string">"https://car.autohome.com.cn/pic/series/66.+"</span>),callback=<span class="string">"parse_images"</span>,follow=True),</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    def parse_images(self,response):</span><br><span class="line">        category = response.xpath(<span class="string">"//div[@class='uibox-title']/text()"</span>).getall()</span><br><span class="line">        category = <span class="string">""</span>.join(category).split()</span><br><span class="line">        srcs = response.xpath(<span class="string">"//div[contains(@class,'uibox-con')]/ul/li//img/@src"</span>).getall()</span><br><span class="line">        srcs = list(map(lambda x:parse.urljoin(response.url,x.replace(<span class="string">"240x180_0_q95_c42_"</span>,<span class="string">"1024x0_1_q95_"</span>)),srcs))</span><br><span class="line">        <span class="keyword">if</span> len(category) != 0:</span><br><span class="line">            yield BmwimagesItem(category=category[0], image_urls=srcs)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/12/%E3%80%90django%E3%80%91---1.%E4%BD%BF%E7%94%A8scrapy%E6%A1%86%E6%9E%B6%E9%AB%98%E6%95%88%E7%88%AC%E5%8F%96%E6%B1%BD%E8%BD%A6%E4%B9%8B%E5%AE%B6%E5%9B%BE%E7%89%87/" data-id="ck2vui8mo0000h8ts7a747vgn" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/11/12/%E3%80%90scrapy%E3%80%91---1.%E4%BD%BF%E7%94%A8scrapy%E6%A1%86%E6%9E%B6%E9%AB%98%E6%95%88%E7%88%AC%E5%8F%96%E6%B1%BD%E8%BD%A6%E4%B9%8B%E5%AE%B6%E5%9B%BE%E7%89%87/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">【scrapy】---1.使用scrapy框架高效爬取汽车之家图片</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/11/12/%E3%80%90django%E3%80%91---1.%E4%BD%BF%E7%94%A8scrapy%E6%A1%86%E6%9E%B6%E9%AB%98%E6%95%88%E7%88%AC%E5%8F%96%E6%B1%BD%E8%BD%A6%E4%B9%8B%E5%AE%B6%E5%9B%BE%E7%89%87/">【django】---1.使用scrapy框架高效爬取汽车之家图片</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/12/%E3%80%90scrapy%E3%80%91---1.%E4%BD%BF%E7%94%A8scrapy%E6%A1%86%E6%9E%B6%E9%AB%98%E6%95%88%E7%88%AC%E5%8F%96%E6%B1%BD%E8%BD%A6%E4%B9%8B%E5%AE%B6%E5%9B%BE%E7%89%87/">【scrapy】---1.使用scrapy框架高效爬取汽车之家图片</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/12/%E3%80%90scrapy%E3%80%91---2.scrapy%E8%BF%9B%E9%98%B6%E5%AD%A6%E4%B9%A0%E4%B9%8B%E9%9A%8F%E6%9C%BA%E8%AF%B7%E6%B1%82%E5%A4%B4%E3%80%81%E9%9A%8F%E6%9C%BA%E4%BB%A3%E7%90%86%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BC%82%E6%AD%A5%E5%AD%98%E5%82%A8/">【scrapy】---2.scrapy进阶学习之随机请求头、随机代理和数据异步存储</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 David Xiang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
