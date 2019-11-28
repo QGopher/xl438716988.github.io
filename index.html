@@ -68,6 +68,219 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-【svn】 1.CentOS7 的svn简单安装与使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/17/%E3%80%90svn%E3%80%91%201.CentOS7%20%E7%9A%84svn%E7%AE%80%E5%8D%95%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/" class="article-date">
+  <time datetime="2019-11-17T12:28:48.522Z" itemprop="datePublished">2019-11-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/17/%E3%80%90svn%E3%80%91%201.CentOS7%20%E7%9A%84svn%E7%AE%80%E5%8D%95%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/">【svn】 1.CentOS7 的svn简单安装与使用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="CentOS7-安装svn"><a href="#CentOS7-安装svn" class="headerlink" title="CentOS7 安装svn"></a>CentOS7 安装svn</h3><ol>
+<li>安装</li>
+</ol>
+<ul>
+<li>CentOS7下yum命令即可方便的完成安装</li>
+</ul>
+<blockquote>
+<p>$ sudo yum install subversion</p>
+</blockquote>
+<ul>
+<li>测试安装是否成功：</li>
+</ul>
+<blockquote>
+<p>$ svnserve –version</p>
+</blockquote>
+<ol start="2">
+<li>建立版本库</li>
+</ol>
+<ul>
+<li>创建svn数据目录（subversion默认是把/var/svn作为数据根目录的，开机启动默认也是从这里）：</li>
+</ul>
+<blockquote>
+<p> $ sudo mkdir -p /var/svn</p>
+</blockquote>
+<ul>
+<li>创建版本库：</li>
+</ul>
+<blockquote>
+<p> $ sudo svnadmin create /var/svn/wangwa</p>
+</blockquote>
+<ul>
+<li>如果删除版本库：</li>
+</ul>
+<blockquote>
+<p>$ sudo rm -rf /var/svn/somnus</p>
+</blockquote>
+<ol start="3">
+<li>配置svn配置文件</li>
+</ol>
+<p>每个版本库创建之后都会生成svnserve.conf主要配置文件。编辑它：</p>
+<blockquote>
+<p> $ sudo vim /var/svn/somnus/conf/svnserve.conf</p>
+</blockquote>
+<p>编辑示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[general]</span><br><span class="line">anon-access = none                #控制非鉴权用户访问版本库的权限</span><br><span class="line">auth-access = write                 #控制鉴权用户访问版本库的权限</span><br><span class="line">password-db = passwd           #指定用户名口令文件名</span><br><span class="line">authz-db = authz                     #指定权限配置文件名</span><br><span class="line">realm = somnus               #指定版本库的认证域，即在登录时提示的认证域名称</span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="4">
+<li>编辑svn用户配置文件</li>
+</ol>
+<blockquote>
+<p> sudo vim /var/svn/somnus/conf/passwd</p>
+</blockquote>
+<p>编辑示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[users]</span><br><span class="line">admin = admin                #用户，密码</span><br><span class="line">fuhd = fuhd                #用户，密码</span><br><span class="line">test = test                #用户，密码</span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="5">
+<li>编辑svn权限控制配置文件</li>
+</ol>
+<blockquote>
+<p>sudo vim /var/svn/somnus/conf/authz</p>
+</blockquote>
+<p>编辑示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[groups]</span><br><span class="line">admin = admin         #admin为用户组,等号之后的admin为用户</span><br><span class="line">test = fuhd,test</span><br><span class="line"></span><br><span class="line">[somnus:/]                #表示根目录（/var/svn/somnus），somnus: 对应前面配置的realm = somnus</span><br><span class="line">@admin = rw            ＃表示admin组对根目录有读写权限,r为读，w为写</span><br><span class="line"></span><br><span class="line">[somnus:/test]         #表示test目录（/var/svn/somnus/test）</span><br><span class="line">@test = rw                #表示test组对test目录有读写权限</span><br></pre></td></tr></table></figure>
+
+
+
+<ol start="6">
+<li>启动，查看和停止SVN服务</li>
+</ol>
+<ul>
+<li>启动SVN服务：</li>
+</ul>
+<blockquote>
+<p> -d : 守护进程  -r : svn数据根目录<br>$ sudo svnserve -dr /var/svn            #用root权限启动</p>
+</blockquote>
+<ul>
+<li>查看SVN服务：</li>
+</ul>
+<blockquote>
+<p>$ ps aux|grep svns erve               #默认端口为：3690</p>
+</blockquote>
+<ol start="7">
+<li>配置防火墙端口</li>
+</ol>
+<p>首先要明确CentOS7的默认防火墙为firewallD。subversion的默认端口为3690，如果没有打开会报错：</p>
+<blockquote>
+<p>$ sudo firewall-cmd –permanent -add-port=3690/tcp<br>$ sudo firewall-cmd –reload</p>
+</blockquote>
+<ol start="8">
+<li>检索项目和切换项目的url</li>
+</ol>
+<ul>
+<li>项目检错</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ svn checkout svn://192.168.0.112/XK_Project . #使用 checkout  服务器资源 本地目录</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>切换项目url</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ svn switch --relocate svn://192.168.0.112/XK_Project svn://192.168.0.120/XK_Project   # 使用 switch 迁移 from  to 新的地址</span><br></pre></td></tr></table></figure>
+
+
+
+
+<ol start="9">
+<li>设置开机启动</li>
+</ol>
+<p>在centos7， 设置开机启动：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ sudo systemctl enable svnserve.service      #注意：根目录必须是/var/svn 这样才能设置成功！！</span><br><span class="line">#设置开机启动后就可以按下面的方式开启或停止服务了</span><br><span class="line">$ sudo systemctl start svnserve.service</span><br><span class="line">$ sudo systemctl stop svnserve.service</span><br></pre></td></tr></table></figure>
+
+<p>临时关闭：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo setenforce 0</span><br></pre></td></tr></table></figure>
+
+<p>永久关闭：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo vim /etc/sysconfig/selinux</span><br></pre></td></tr></table></figure>
+
+
+<p>修改：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELINUX = disable               #值修改为disable.</span><br></pre></td></tr></table></figure>
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/17/%E3%80%90svn%E3%80%91%201.CentOS7%20%E7%9A%84svn%E7%AE%80%E5%8D%95%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/" data-id="ck3ib5fvs0001qcts189r5ef7" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-【scrapy】 2.scrapy进阶学习之随机请求头、随机代理和数据异步存储" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/12/%E3%80%90scrapy%E3%80%91%202.scrapy%E8%BF%9B%E9%98%B6%E5%AD%A6%E4%B9%A0%E4%B9%8B%E9%9A%8F%E6%9C%BA%E8%AF%B7%E6%B1%82%E5%A4%B4%E3%80%81%E9%9A%8F%E6%9C%BA%E4%BB%A3%E7%90%86%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BC%82%E6%AD%A5%E5%AD%98%E5%82%A8/" class="article-date">
+  <time datetime="2019-11-12T12:49:02.922Z" itemprop="datePublished">2019-11-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/12/%E3%80%90scrapy%E3%80%91%202.scrapy%E8%BF%9B%E9%98%B6%E5%AD%A6%E4%B9%A0%E4%B9%8B%E9%9A%8F%E6%9C%BA%E8%AF%B7%E6%B1%82%E5%A4%B4%E3%80%81%E9%9A%8F%E6%9C%BA%E4%BB%A3%E7%90%86%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BC%82%E6%AD%A5%E5%AD%98%E5%82%A8/">【scrapy】 2.scrapy进阶学习之随机请求头、随机代理和数据异步存储</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>使用scrapy框架完成图片的爬取</p>
+<h2 id="一、设置随机请求头中间件"><a href="#一、设置随机请求头中间件" class="headerlink" title="一、设置随机请求头中间件"></a>一、设置随机请求头中间件</h2><h3 id="修改middlewares-py中间件内容"><a href="#修改middlewares-py中间件内容" class="headerlink" title="修改middlewares.py中间件内容"></a>修改middlewares.py中间件内容</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">import random</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编写（重写）download中间件</span></span><br><span class="line">class BmwimagesDownloaderMiddleware(object):</span><br><span class="line">    <span class="comment"># Not all methods need to be defined. If a method is not defined,</span></span><br><span class="line">    <span class="comment"># scrapy acts as if the downloader middleware does not modify the</span></span><br><span class="line">    <span class="comment"># passed objects.</span></span><br><span class="line"></span><br><span class="line">    USER_AGENT = &#123;</span><br><span class="line">        <span class="string">'Mozilla/5.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0; Acoo Browser 1.98.744; .NET CLR 3.5.30729)'</span>,</span><br><span class="line">        <span class="string">'Chrome (AppleWebKit/537.1; Chrome50.0; Windows NT 6.3) AppleWebKit/537.36 (KHTML like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393'</span>,</span><br><span class="line">        <span class="string">'Cyberdog/2.0 (Macintosh; 68k)'</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    def process_request(self, request, spider):</span><br><span class="line"></span><br><span class="line">        user_agent = random.choice(self.USER_AGENT)</span><br><span class="line">        request.headers[<span class="string">'User-Agent'</span>] = user_agent</span><br><span class="line"></span><br><span class="line">        <span class="built_in">return</span> None</span><br></pre></td></tr></table></figure>
+
+<h3 id="settings-py开启下载中间件"><a href="#settings-py开启下载中间件" class="headerlink" title="settings.py开启下载中间件"></a>settings.py开启下载中间件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DOWNLOADER_MIDDLEWARES = &#123;</span><br><span class="line">   <span class="string">'BmwImages.middlewares.BmwimagesDownloaderMiddleware'</span>: 543,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="二、设置随机代理中间件"><a href="#二、设置随机代理中间件" class="headerlink" title="二、设置随机代理中间件"></a>二、设置随机代理中间件</h2><h3 id="修改middlewares-py中间件内容-1"><a href="#修改middlewares-py中间件内容-1" class="headerlink" title="修改middlewares.py中间件内容"></a>修改middlewares.py中间件内容</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import random</span><br><span class="line">def process_request(self, request, spider):</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 设置IP代理中间件</span></span><br><span class="line">    <span class="comment"># 如果购买的是代理ip，会得到代理ip及端口列表</span></span><br><span class="line">    proxy_list = []</span><br><span class="line">    proxy = random.choice(proxy_list)</span><br><span class="line">    request.meta[<span class="string">'proxy'</span>] = proxy</span><br></pre></td></tr></table></figure>
+
+<h3 id="settings-py开启下载中间件-1"><a href="#settings-py开启下载中间件-1" class="headerlink" title="settings.py开启下载中间件"></a>settings.py开启下载中间件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DOWNLOADER_MIDDLEWARES = &#123;</span><br><span class="line">   <span class="string">'BmwImages.middlewares.BmwimagesDownloaderMiddleware'</span>: 543,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="爬取数据存入数据库"><a href="#爬取数据存入数据库" class="headerlink" title="爬取数据存入数据库"></a>爬取数据存入数据库</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">import pymysql</span><br><span class="line"></span><br><span class="line">class JsPipeline(object):</span><br><span class="line">    def __init__(self):</span><br><span class="line">        dbparams = &#123;</span><br><span class="line">            <span class="string">'host'</span>: <span class="string">'127.0.0.1'</span>,</span><br><span class="line">            <span class="string">'port'</span>: 3306,</span><br><span class="line">            <span class="string">'user'</span>: <span class="string">'root'</span>,</span><br><span class="line">            <span class="string">'password'</span>: <span class="string">'root'</span>,</span><br><span class="line">            <span class="string">'database'</span>: <span class="string">'jianshu'</span>,</span><br><span class="line">            <span class="string">'charset'</span>: <span class="string">'utf8'</span></span><br><span class="line">        &#125;</span><br><span class="line">        self.conn = pymysql.connect(**dbparams)</span><br><span class="line">        self.cursor = self.conn.cursor()</span><br><span class="line"></span><br><span class="line">    def process_item(self, item, spider):</span><br><span class="line">        sql = <span class="string">"INSERT INTO `article` (`title`) VALUES ('%s')"</span>%item[<span class="string">'title'</span>]</span><br><span class="line">        self.cursor.execute(sql)</span><br><span class="line">        self.conn.commit()</span><br><span class="line">        <span class="built_in">return</span> item</span><br></pre></td></tr></table></figure>
+
+<h3 id="修改成爬取异步存储"><a href="#修改成爬取异步存储" class="headerlink" title="修改成爬取异步存储"></a>修改成爬取异步存储</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">from pymysql import cursors</span><br><span class="line">from twisted.enterprise import adbapi</span><br><span class="line"></span><br><span class="line">class JsTwistedPipeline(object):</span><br><span class="line"></span><br><span class="line">    def __init__(self):</span><br><span class="line">        dbparams = &#123;</span><br><span class="line">            <span class="string">'host'</span>: <span class="string">'127.0.0.1'</span>,</span><br><span class="line">            <span class="string">'port'</span>: 3306,</span><br><span class="line">            <span class="string">'user'</span>: <span class="string">'root'</span>,</span><br><span class="line">            <span class="string">'password'</span>: <span class="string">'root'</span>,</span><br><span class="line">            <span class="string">'database'</span>: <span class="string">'jianshu'</span>,</span><br><span class="line">            <span class="string">'charset'</span>: <span class="string">'utf8'</span>,</span><br><span class="line">            <span class="string">'cursorclass'</span>:cursors.DictCursor</span><br><span class="line">        &#125;</span><br><span class="line">        self.dbpool = adbapi.ConnectionPool(<span class="string">'pymysql'</span>,**dbparams)</span><br><span class="line"></span><br><span class="line">    def process_item(self, item, spider):</span><br><span class="line">        sql = <span class="string">"INSERT INTO `article` (`title`) VALUES ('%s')"</span>%item[<span class="string">'title'</span>]</span><br><span class="line">        defer = self.dbpool.runInteraction(self.insert_item,item)</span><br><span class="line">        defer.addErrback(self.handle_error,item,spider)</span><br><span class="line">        <span class="built_in">return</span> item</span><br><span class="line"></span><br><span class="line">    def insert_item(self,cursor,item):</span><br><span class="line">        sql = <span class="string">"INSERT INTO `article` (`title`) VALUES ('%s')"</span>%item[<span class="string">'title'</span>]</span><br><span class="line">        cursor.execute(sql)</span><br><span class="line"></span><br><span class="line">    def handle_error(self,error,item,spider):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">'='</span>*10+<span class="string">"error"</span>+<span class="string">"="</span>*10)</span><br><span class="line">        <span class="built_in">print</span>(error)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">'='</span>*10+<span class="string">"error"</span>+<span class="string">"="</span>*10)</span><br></pre></td></tr></table></figure>
+
+<h3 id="使用selenium-webdriver爬取ajax请求的数据"><a href="#使用selenium-webdriver爬取ajax请求的数据" class="headerlink" title="使用selenium+webdriver爬取ajax请求的数据"></a>使用selenium+webdriver爬取ajax请求的数据</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">from selenium import webdriver</span><br><span class="line">from scrapy.http import HtmlResponse</span><br><span class="line">import time</span><br><span class="line"></span><br><span class="line">class JsSeleniumWebDriverMiddleware(object):</span><br><span class="line"></span><br><span class="line">    def __init__(self):</span><br><span class="line">        driver_path = r<span class="string">"D:\python\scrapy\study\20191009\chromedriver\chromedriver2-0.exe"</span></span><br><span class="line">        self.driver = webdriver.Chrome(executable_path=driver_path)</span><br><span class="line"></span><br><span class="line">    def process_request(self, request, spider):</span><br><span class="line">        self.driver.get(request.url)</span><br><span class="line">        time.sleep(1)</span><br><span class="line">        try:</span><br><span class="line">            <span class="keyword">while</span> True:</span><br><span class="line">                showmore = self.driver.find_element_by_xpath(<span class="string">"更多"</span>)</span><br><span class="line">                showmore.click()</span><br><span class="line">                time.sleep(0.3)</span><br><span class="line">                <span class="keyword">if</span> not showmore:</span><br><span class="line">                    <span class="built_in">break</span></span><br><span class="line">        except:</span><br><span class="line">            pass</span><br><span class="line"></span><br><span class="line">        <span class="built_in">source</span> = self.driver.page_source</span><br><span class="line">        response = HtmlResponse(url=self.driver.current_url,body=<span class="built_in">source</span>,request=request,encoding=<span class="string">'utf-8'</span>)</span><br><span class="line">        <span class="built_in">return</span> response</span><br></pre></td></tr></table></figure>
+
+<h3 id="开启selenium-webdriver中间件"><a href="#开启selenium-webdriver中间件" class="headerlink" title="开启selenium+webdriver中间件"></a>开启selenium+webdriver中间件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DOWNLOADER_MIDDLEWARES = &#123;</span><br><span class="line">   <span class="string">'BmwImages.middlewares.JsSeleniumWebDriverMiddleware'</span>: 543,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/12/%E3%80%90scrapy%E3%80%91%202.scrapy%E8%BF%9B%E9%98%B6%E5%AD%A6%E4%B9%A0%E4%B9%8B%E9%9A%8F%E6%9C%BA%E8%AF%B7%E6%B1%82%E5%A4%B4%E3%80%81%E9%9A%8F%E6%9C%BA%E4%BB%A3%E7%90%86%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BC%82%E6%AD%A5%E5%AD%98%E5%82%A8/" data-id="ck3ib5fyn0003qcts2hhc6js9" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-【scrapy】 1.使用scrapy框架高效爬取汽车之家图片" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/11/12/%E3%80%90scrapy%E3%80%91%201.%E4%BD%BF%E7%94%A8scrapy%E6%A1%86%E6%9E%B6%E9%AB%98%E6%95%88%E7%88%AC%E5%8F%96%E6%B1%BD%E8%BD%A6%E4%B9%8B%E5%AE%B6%E5%9B%BE%E7%89%87/" class="article-date">
@@ -111,7 +324,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/12/%E3%80%90scrapy%E3%80%91%201.%E4%BD%BF%E7%94%A8scrapy%E6%A1%86%E6%9E%B6%E9%AB%98%E6%95%88%E7%88%AC%E5%8F%96%E6%B1%BD%E8%BD%A6%E4%B9%8B%E5%AE%B6%E5%9B%BE%E7%89%87/" data-id="ck2vunedh0000mots2tyxbus9" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/12/%E3%80%90scrapy%E3%80%91%201.%E4%BD%BF%E7%94%A8scrapy%E6%A1%86%E6%9E%B6%E9%AB%98%E6%95%88%E7%88%AC%E5%8F%96%E6%B1%BD%E8%BD%A6%E4%B9%8B%E5%AE%B6%E5%9B%BE%E7%89%87/" data-id="ck3ib5fvi0000qcts9ku8g1e4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -121,9 +334,9 @@
 
 
   
-    <article id="post-【scrapy】 2.scrapy进阶学习之随机请求头、随机代理和数据异步存储" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-【django】 1.使用django2.0实现快速建站" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/11/12/%E3%80%90scrapy%E3%80%91%202.scrapy%E8%BF%9B%E9%98%B6%E5%AD%A6%E4%B9%A0%E4%B9%8B%E9%9A%8F%E6%9C%BA%E8%AF%B7%E6%B1%82%E5%A4%B4%E3%80%81%E9%9A%8F%E6%9C%BA%E4%BB%A3%E7%90%86%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BC%82%E6%AD%A5%E5%AD%98%E5%82%A8/" class="article-date">
+    <a href="/2019/11/12/%E3%80%90django%E3%80%91%201.%E4%BD%BF%E7%94%A8django2.0%E5%AE%9E%E7%8E%B0%E5%BF%AB%E9%80%9F%E5%BB%BA%E7%AB%99/" class="article-date">
   <time datetime="2019-11-12T08:14:51.503Z" itemprop="datePublished">2019-11-12</time>
 </a>
     
@@ -135,7 +348,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/12/%E3%80%90scrapy%E3%80%91%202.scrapy%E8%BF%9B%E9%98%B6%E5%AD%A6%E4%B9%A0%E4%B9%8B%E9%9A%8F%E6%9C%BA%E8%AF%B7%E6%B1%82%E5%A4%B4%E3%80%81%E9%9A%8F%E6%9C%BA%E4%BB%A3%E7%90%86%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BC%82%E6%AD%A5%E5%AD%98%E5%82%A8/">【scrapy】 2.scrapy进阶学习之随机请求头、随机代理和数据异步存储</a>
+      <a class="article-title" href="/2019/11/12/%E3%80%90django%E3%80%91%201.%E4%BD%BF%E7%94%A8django2.0%E5%AE%9E%E7%8E%B0%E5%BF%AB%E9%80%9F%E5%BB%BA%E7%AB%99/">【django】 1.使用django2.0实现快速建站</a>
     </h1>
   
 
@@ -143,12 +356,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>使用scrapy框架完成图片的爬取</p>
-<h2 id="一、设置随机请求头中间件"><a href="#一、设置随机请求头中间件" class="headerlink" title="一、设置随机请求头中间件"></a>一、设置随机请求头中间件</h2><h3 id="修改middlewares-py中间件内容"><a href="#修改middlewares-py中间件内容" class="headerlink" title="修改middlewares.py中间件内容"></a>修改middlewares.py中间件内容</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">import random</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编写（重写）download中间件</span></span><br><span class="line">class BmwimagesDownloaderMiddleware(object):</span><br><span class="line">    <span class="comment"># Not all methods need to be defined. If a method is not defined,</span></span><br><span class="line">    <span class="comment"># scrapy acts as if the downloader middleware does not modify the</span></span><br><span class="line">    <span class="comment"># passed objects.</span></span><br><span class="line"></span><br><span class="line">    USER_AGENT = &#123;</span><br><span class="line">        <span class="string">'Mozilla/5.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0; Acoo Browser 1.98.744; .NET CLR 3.5.30729)'</span>,</span><br><span class="line">        <span class="string">'Chrome (AppleWebKit/537.1; Chrome50.0; Windows NT 6.3) AppleWebKit/537.36 (KHTML like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393'</span>,</span><br><span class="line">        <span class="string">'Cyberdog/2.0 (Macintosh; 68k)'</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    def process_request(self, request, spider):</span><br><span class="line"></span><br><span class="line">        user_agent = random.choice(self.USER_AGENT)</span><br><span class="line">        request.headers[<span class="string">'User-Agent'</span>] = user_agent</span><br><span class="line"></span><br><span class="line">        <span class="built_in">return</span> None</span><br></pre></td></tr></table></figure>
+        <h2 id="一、django安装与配置"><a href="#一、django安装与配置" class="headerlink" title="一、django安装与配置"></a>一、django安装与配置</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装django</span></span><br><span class="line">pip3 install django==2.0.2</span><br><span class="line"><span class="comment"># 新建项目</span></span><br><span class="line"><span class="built_in">cd</span> desktop</span><br><span class="line">django-admin startproject wordcount</span><br><span class="line"><span class="comment"># 启动项目</span></span><br><span class="line">python manage.py runserver</span><br></pre></td></tr></table></figure>
 
 <h3 id="settings-py开启下载中间件"><a href="#settings-py开启下载中间件" class="headerlink" title="settings.py开启下载中间件"></a>settings.py开启下载中间件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DOWNLOADER_MIDDLEWARES = &#123;</span><br><span class="line">   <span class="string">'BmwImages.middlewares.BmwimagesDownloaderMiddleware'</span>: 543,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="二、设置随机代理中间件"><a href="#二、设置随机代理中间件" class="headerlink" title="二、设置随机代理中间件"></a>二、设置随机代理中间件</h2><h3 id="修改middlewares-py中间件内容-1"><a href="#修改middlewares-py中间件内容-1" class="headerlink" title="修改middlewares.py中间件内容"></a>修改middlewares.py中间件内容</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import random</span><br><span class="line">def process_request(self, request, spider):</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 设置IP代理中间件</span></span><br><span class="line">    <span class="comment"># 如果购买的是代理ip，会得到代理ip及端口列表</span></span><br><span class="line">    proxy_list = []</span><br><span class="line">    proxy = random.choice(proxy_list)</span><br><span class="line">    request.meta[<span class="string">'proxy'</span>] = proxy</span><br></pre></td></tr></table></figure>
+<h2 id="二、设置随机代理中间件"><a href="#二、设置随机代理中间件" class="headerlink" title="二、设置随机代理中间件"></a>二、设置随机代理中间件</h2><h3 id="修改middlewares-py中间件内容"><a href="#修改middlewares-py中间件内容" class="headerlink" title="修改middlewares.py中间件内容"></a>修改middlewares.py中间件内容</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import random</span><br><span class="line">def process_request(self, request, spider):</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 设置IP代理中间件</span></span><br><span class="line">    <span class="comment"># 如果购买的是代理ip，会得到代理ip及端口列表</span></span><br><span class="line">    proxy_list = []</span><br><span class="line">    proxy = random.choice(proxy_list)</span><br><span class="line">    request.meta[<span class="string">'proxy'</span>] = proxy</span><br></pre></td></tr></table></figure>
 
 <h3 id="settings-py开启下载中间件-1"><a href="#settings-py开启下载中间件-1" class="headerlink" title="settings.py开启下载中间件"></a>settings.py开启下载中间件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DOWNLOADER_MIDDLEWARES = &#123;</span><br><span class="line">   <span class="string">'BmwImages.middlewares.BmwimagesDownloaderMiddleware'</span>: 543,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -163,7 +375,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/12/%E3%80%90scrapy%E3%80%91%202.scrapy%E8%BF%9B%E9%98%B6%E5%AD%A6%E4%B9%A0%E4%B9%8B%E9%9A%8F%E6%9C%BA%E8%AF%B7%E6%B1%82%E5%A4%B4%E3%80%81%E9%9A%8F%E6%9C%BA%E4%BB%A3%E7%90%86%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BC%82%E6%AD%A5%E5%AD%98%E5%82%A8/" data-id="ck2vunee50001motsgghieb2y" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/12/%E3%80%90django%E3%80%91%201.%E4%BD%BF%E7%94%A8django2.0%E5%AE%9E%E7%8E%B0%E5%BF%AB%E9%80%9F%E5%BB%BA%E7%AB%99/" data-id="ck3ib5fwk0002qcts8dcsbjfz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -204,11 +416,19 @@
       <ul>
         
           <li>
-            <a href="/2019/11/12/%E3%80%90scrapy%E3%80%91%201.%E4%BD%BF%E7%94%A8scrapy%E6%A1%86%E6%9E%B6%E9%AB%98%E6%95%88%E7%88%AC%E5%8F%96%E6%B1%BD%E8%BD%A6%E4%B9%8B%E5%AE%B6%E5%9B%BE%E7%89%87/">【scrapy】 1.使用scrapy框架高效爬取汽车之家图片</a>
+            <a href="/2019/11/17/%E3%80%90svn%E3%80%91%201.CentOS7%20%E7%9A%84svn%E7%AE%80%E5%8D%95%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/">【svn】 1.CentOS7 的svn简单安装与使用</a>
           </li>
         
           <li>
             <a href="/2019/11/12/%E3%80%90scrapy%E3%80%91%202.scrapy%E8%BF%9B%E9%98%B6%E5%AD%A6%E4%B9%A0%E4%B9%8B%E9%9A%8F%E6%9C%BA%E8%AF%B7%E6%B1%82%E5%A4%B4%E3%80%81%E9%9A%8F%E6%9C%BA%E4%BB%A3%E7%90%86%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BC%82%E6%AD%A5%E5%AD%98%E5%82%A8/">【scrapy】 2.scrapy进阶学习之随机请求头、随机代理和数据异步存储</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/12/%E3%80%90scrapy%E3%80%91%201.%E4%BD%BF%E7%94%A8scrapy%E6%A1%86%E6%9E%B6%E9%AB%98%E6%95%88%E7%88%AC%E5%8F%96%E6%B1%BD%E8%BD%A6%E4%B9%8B%E5%AE%B6%E5%9B%BE%E7%89%87/">【scrapy】 1.使用scrapy框架高效爬取汽车之家图片</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/12/%E3%80%90django%E3%80%91%201.%E4%BD%BF%E7%94%A8django2.0%E5%AE%9E%E7%8E%B0%E5%BF%AB%E9%80%9F%E5%BB%BA%E7%AB%99/">【django】 1.使用django2.0实现快速建站</a>
           </li>
         
       </ul>

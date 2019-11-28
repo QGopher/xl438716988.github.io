@@ -5,17 +5,17 @@
   
 
   
-  <title>【scrapy】 2.scrapy进阶学习之随机请求头、随机代理和数据异步存储 | Completion is more important than perfection</title>
+  <title>【django】 1.使用django2.0实现快速建站 | Completion is more important than perfection</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="使用scrapy框架完成图片的爬取 一、设置随机请求头中间件修改middlewares.py中间件内容1234567891011121314151617181920import random# 编写（重写）download中间件class BmwimagesDownloaderMiddleware(object):    # Not all methods need to be defined.">
+  <meta name="description" content="一、django安装与配置安装1234567# 安装djangopip3 install django==2.0.2# 新建项目cd desktopdjango-admin startproject wordcount# 启动项目python manage.py runserver  settings.py开启下载中间件123DOWNLOADER_MIDDLEWARES = &amp;#123;   &amp;apos;B">
 <meta name="keywords" content="python,scrapy,makedown">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【scrapy】 2.scrapy进阶学习之随机请求头、随机代理和数据异步存储">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;12&#x2F;%E3%80%90scrapy%E3%80%91%202.scrapy%E8%BF%9B%E9%98%B6%E5%AD%A6%E4%B9%A0%E4%B9%8B%E9%9A%8F%E6%9C%BA%E8%AF%B7%E6%B1%82%E5%A4%B4%E3%80%81%E9%9A%8F%E6%9C%BA%E4%BB%A3%E7%90%86%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BC%82%E6%AD%A5%E5%AD%98%E5%82%A8&#x2F;index.html">
+<meta property="og:title" content="【django】 1.使用django2.0实现快速建站">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;12&#x2F;%E3%80%90django%E3%80%91%201.%E4%BD%BF%E7%94%A8django2.0%E5%AE%9E%E7%8E%B0%E5%BF%AB%E9%80%9F%E5%BB%BA%E7%AB%99&#x2F;index.html">
 <meta property="og:site_name" content="Completion is more important than perfection">
-<meta property="og:description" content="使用scrapy框架完成图片的爬取 一、设置随机请求头中间件修改middlewares.py中间件内容1234567891011121314151617181920import random# 编写（重写）download中间件class BmwimagesDownloaderMiddleware(object):    # Not all methods need to be defined.">
+<meta property="og:description" content="一、django安装与配置安装1234567# 安装djangopip3 install django==2.0.2# 新建项目cd desktopdjango-admin startproject wordcount# 启动项目python manage.py runserver  settings.py开启下载中间件123DOWNLOADER_MIDDLEWARES = &amp;#123;   &amp;apos;B">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-12T08:28:57.078Z">
+<meta property="og:updated_time" content="2019-11-12T12:56:08.555Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="Completion is more important than perfection" type="application/atom+xml">
@@ -67,10 +67,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-【scrapy】 2.scrapy进阶学习之随机请求头、随机代理和数据异步存储" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-【django】 1.使用django2.0实现快速建站" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/11/12/%E3%80%90scrapy%E3%80%91%202.scrapy%E8%BF%9B%E9%98%B6%E5%AD%A6%E4%B9%A0%E4%B9%8B%E9%9A%8F%E6%9C%BA%E8%AF%B7%E6%B1%82%E5%A4%B4%E3%80%81%E9%9A%8F%E6%9C%BA%E4%BB%A3%E7%90%86%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BC%82%E6%AD%A5%E5%AD%98%E5%82%A8/" class="article-date">
-  <time datetime="2019-11-12T12:49:02.922Z" itemprop="datePublished">2019-11-12</time>
+    <a href="/2019/11/12/%E3%80%90django%E3%80%91%201.%E4%BD%BF%E7%94%A8django2.0%E5%AE%9E%E7%8E%B0%E5%BF%AB%E9%80%9F%E5%BB%BA%E7%AB%99/" class="article-date">
+  <time datetime="2019-11-12T08:14:51.503Z" itemprop="datePublished">2019-11-12</time>
 </a>
     
   </div>
@@ -81,7 +81,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      【scrapy】 2.scrapy进阶学习之随机请求头、随机代理和数据异步存储
+      【django】 1.使用django2.0实现快速建站
     </h1>
   
 
@@ -89,12 +89,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>使用scrapy框架完成图片的爬取</p>
-<h2 id="一、设置随机请求头中间件"><a href="#一、设置随机请求头中间件" class="headerlink" title="一、设置随机请求头中间件"></a>一、设置随机请求头中间件</h2><h3 id="修改middlewares-py中间件内容"><a href="#修改middlewares-py中间件内容" class="headerlink" title="修改middlewares.py中间件内容"></a>修改middlewares.py中间件内容</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">import random</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编写（重写）download中间件</span></span><br><span class="line">class BmwimagesDownloaderMiddleware(object):</span><br><span class="line">    <span class="comment"># Not all methods need to be defined. If a method is not defined,</span></span><br><span class="line">    <span class="comment"># scrapy acts as if the downloader middleware does not modify the</span></span><br><span class="line">    <span class="comment"># passed objects.</span></span><br><span class="line"></span><br><span class="line">    USER_AGENT = &#123;</span><br><span class="line">        <span class="string">'Mozilla/5.0 (compatible; MSIE 8.0; Windows NT 6.0; Trident/4.0; Acoo Browser 1.98.744; .NET CLR 3.5.30729)'</span>,</span><br><span class="line">        <span class="string">'Chrome (AppleWebKit/537.1; Chrome50.0; Windows NT 6.3) AppleWebKit/537.36 (KHTML like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393'</span>,</span><br><span class="line">        <span class="string">'Cyberdog/2.0 (Macintosh; 68k)'</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    def process_request(self, request, spider):</span><br><span class="line"></span><br><span class="line">        user_agent = random.choice(self.USER_AGENT)</span><br><span class="line">        request.headers[<span class="string">'User-Agent'</span>] = user_agent</span><br><span class="line"></span><br><span class="line">        <span class="built_in">return</span> None</span><br></pre></td></tr></table></figure>
+        <h2 id="一、django安装与配置"><a href="#一、django安装与配置" class="headerlink" title="一、django安装与配置"></a>一、django安装与配置</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装django</span></span><br><span class="line">pip3 install django==2.0.2</span><br><span class="line"><span class="comment"># 新建项目</span></span><br><span class="line"><span class="built_in">cd</span> desktop</span><br><span class="line">django-admin startproject wordcount</span><br><span class="line"><span class="comment"># 启动项目</span></span><br><span class="line">python manage.py runserver</span><br></pre></td></tr></table></figure>
 
 <h3 id="settings-py开启下载中间件"><a href="#settings-py开启下载中间件" class="headerlink" title="settings.py开启下载中间件"></a>settings.py开启下载中间件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DOWNLOADER_MIDDLEWARES = &#123;</span><br><span class="line">   <span class="string">'BmwImages.middlewares.BmwimagesDownloaderMiddleware'</span>: 543,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="二、设置随机代理中间件"><a href="#二、设置随机代理中间件" class="headerlink" title="二、设置随机代理中间件"></a>二、设置随机代理中间件</h2><h3 id="修改middlewares-py中间件内容-1"><a href="#修改middlewares-py中间件内容-1" class="headerlink" title="修改middlewares.py中间件内容"></a>修改middlewares.py中间件内容</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import random</span><br><span class="line">def process_request(self, request, spider):</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 设置IP代理中间件</span></span><br><span class="line">    <span class="comment"># 如果购买的是代理ip，会得到代理ip及端口列表</span></span><br><span class="line">    proxy_list = []</span><br><span class="line">    proxy = random.choice(proxy_list)</span><br><span class="line">    request.meta[<span class="string">'proxy'</span>] = proxy</span><br></pre></td></tr></table></figure>
+<h2 id="二、设置随机代理中间件"><a href="#二、设置随机代理中间件" class="headerlink" title="二、设置随机代理中间件"></a>二、设置随机代理中间件</h2><h3 id="修改middlewares-py中间件内容"><a href="#修改middlewares-py中间件内容" class="headerlink" title="修改middlewares.py中间件内容"></a>修改middlewares.py中间件内容</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import random</span><br><span class="line">def process_request(self, request, spider):</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 设置IP代理中间件</span></span><br><span class="line">    <span class="comment"># 如果购买的是代理ip，会得到代理ip及端口列表</span></span><br><span class="line">    proxy_list = []</span><br><span class="line">    proxy = random.choice(proxy_list)</span><br><span class="line">    request.meta[<span class="string">'proxy'</span>] = proxy</span><br></pre></td></tr></table></figure>
 
 <h3 id="settings-py开启下载中间件-1"><a href="#settings-py开启下载中间件-1" class="headerlink" title="settings.py开启下载中间件"></a>settings.py开启下载中间件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DOWNLOADER_MIDDLEWARES = &#123;</span><br><span class="line">   <span class="string">'BmwImages.middlewares.BmwimagesDownloaderMiddleware'</span>: 543,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -109,7 +108,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/12/%E3%80%90scrapy%E3%80%91%202.scrapy%E8%BF%9B%E9%98%B6%E5%AD%A6%E4%B9%A0%E4%B9%8B%E9%9A%8F%E6%9C%BA%E8%AF%B7%E6%B1%82%E5%A4%B4%E3%80%81%E9%9A%8F%E6%9C%BA%E4%BB%A3%E7%90%86%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BC%82%E6%AD%A5%E5%AD%98%E5%82%A8/" data-id="ck3ib5fyn0003qcts2hhc6js9" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/12/%E3%80%90django%E3%80%91%201.%E4%BD%BF%E7%94%A8django2.0%E5%AE%9E%E7%8E%B0%E5%BF%AB%E9%80%9F%E5%BB%BA%E7%AB%99/" data-id="ck3ib5fwk0002qcts8dcsbjfz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -118,20 +117,15 @@
     
 <nav id="article-nav">
   
-    <a href="/2019/11/17/%E3%80%90svn%E3%80%91%201.CentOS7%20%E7%9A%84svn%E7%AE%80%E5%8D%95%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/11/12/%E3%80%90scrapy%E3%80%91%201.%E4%BD%BF%E7%94%A8scrapy%E6%A1%86%E6%9E%B6%E9%AB%98%E6%95%88%E7%88%AC%E5%8F%96%E6%B1%BD%E8%BD%A6%E4%B9%8B%E5%AE%B6%E5%9B%BE%E7%89%87/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          【svn】 1.CentOS7 的svn简单安装与使用
+          【scrapy】 1.使用scrapy框架高效爬取汽车之家图片
         
       </div>
     </a>
   
-  
-    <a href="/2019/11/12/%E3%80%90scrapy%E3%80%91%201.%E4%BD%BF%E7%94%A8scrapy%E6%A1%86%E6%9E%B6%E9%AB%98%E6%95%88%E7%88%AC%E5%8F%96%E6%B1%BD%E8%BD%A6%E4%B9%8B%E5%AE%B6%E5%9B%BE%E7%89%87/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">【scrapy】 1.使用scrapy框架高效爬取汽车之家图片</div>
-    </a>
   
 </nav>
 
