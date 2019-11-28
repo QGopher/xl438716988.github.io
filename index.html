@@ -96,43 +96,51 @@
 <ul>
 <li>CentOS7下yum命令即可方便的完成安装</li>
 </ul>
-<blockquote>
-<p>$ sudo yum install subversion</p>
-</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo yum install subversion</span><br></pre></td></tr></table></figure>
+
+
+
 <ul>
 <li>测试安装是否成功：</li>
 </ul>
-<blockquote>
-<p>$ svnserve –version</p>
-</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ svnserve --version</span><br></pre></td></tr></table></figure>
+
+
+
 <ol start="2">
 <li>建立版本库</li>
 </ol>
 <ul>
-<li>创建svn数据目录（subversion默认是把/var/svn作为数据根目录的，开机启动默认也是从这里）：</li>
+<li><p>创建svn数据目录（subversion默认是把/var/svn作为数据根目录的，开机启动默认也是从这里）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo mkdir -p /var/svn</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
 </ul>
-<blockquote>
-<p> $ sudo mkdir -p /var/svn</p>
-</blockquote>
 <ul>
-<li>创建版本库：</li>
+<li><p>创建版本库：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo svnadmin create /var/svn/wangwa</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+</li>
 </ul>
-<blockquote>
-<p> $ sudo svnadmin create /var/svn/wangwa</p>
-</blockquote>
 <ul>
 <li>如果删除版本库：</li>
 </ul>
-<blockquote>
-<p>$ sudo rm -rf /var/svn/somnus</p>
-</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo rm -rf /var/svn/somnus</span><br></pre></td></tr></table></figure>
+
+
+
 <ol start="3">
 <li>配置svn配置文件</li>
 </ol>
 <p>每个版本库创建之后都会生成svnserve.conf主要配置文件。编辑它：</p>
-<blockquote>
-<p> $ sudo vim /var/svn/somnus/conf/svnserve.conf</p>
-</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo vim /var/svn/somnus/conf/svnserve.conf</span><br></pre></td></tr></table></figure>
+
 <p>编辑示例：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[general]</span><br><span class="line">anon-access = none                #控制非鉴权用户访问版本库的权限</span><br><span class="line">auth-access = write                 #控制鉴权用户访问版本库的权限</span><br><span class="line">password-db = passwd           #指定用户名口令文件名</span><br><span class="line">authz-db = authz                     #指定权限配置文件名</span><br><span class="line">realm = somnus               #指定版本库的认证域，即在登录时提示的认证域名称</span><br></pre></td></tr></table></figure>
 
@@ -141,9 +149,8 @@
 <ol start="4">
 <li>编辑svn用户配置文件</li>
 </ol>
-<blockquote>
-<p> sudo vim /var/svn/somnus/conf/passwd</p>
-</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /var/svn/somnus/conf/passwd</span><br></pre></td></tr></table></figure>
+
 <p>编辑示例：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[users]</span><br><span class="line">admin = admin                #用户，密码</span><br><span class="line">fuhd = fuhd                #用户，密码</span><br><span class="line">test = test                #用户，密码</span><br></pre></td></tr></table></figure>
 
@@ -152,9 +159,8 @@
 <ol start="5">
 <li>编辑svn权限控制配置文件</li>
 </ol>
-<blockquote>
-<p>sudo vim /var/svn/somnus/conf/authz</p>
-</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /var/svn/somnus/conf/authz</span><br></pre></td></tr></table></figure>
+
 <p>编辑示例：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[groups]</span><br><span class="line">admin = admin         #admin为用户组,等号之后的admin为用户</span><br><span class="line">test = fuhd,test</span><br><span class="line"></span><br><span class="line">[somnus:/]                #表示根目录（/var/svn/somnus），somnus: 对应前面配置的realm = somnus</span><br><span class="line">@admin = rw            ＃表示admin组对根目录有读写权限,r为读，w为写</span><br><span class="line"></span><br><span class="line">[somnus:/test]         #表示test目录（/var/svn/somnus/test）</span><br><span class="line">@test = rw                #表示test组对test目录有读写权限</span><br></pre></td></tr></table></figure>
 
@@ -164,24 +170,31 @@
 <li>启动，查看和停止SVN服务</li>
 </ol>
 <ul>
-<li>启动SVN服务：</li>
+<li><p>启动SVN服务：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#-d : 守护进程  -r : svn数据根目录 </span><br><span class="line">$ sudo svnserve -dr /var/svn            #用root权限启动</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+</li>
 </ul>
-<blockquote>
-<p> -d : 守护进程  -r : svn数据根目录<br>$ sudo svnserve -dr /var/svn            #用root权限启动</p>
-</blockquote>
 <ul>
 <li>查看SVN服务：</li>
 </ul>
-<blockquote>
-<p>$ ps aux|grep svns erve               #默认端口为：3690</p>
-</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ps aux|grep svns erve               #默认端口为：3690</span><br></pre></td></tr></table></figure>
+
+
+
 <ol start="7">
 <li>配置防火墙端口</li>
 </ol>
 <p>首先要明确CentOS7的默认防火墙为firewallD。subversion的默认端口为3690，如果没有打开会报错：</p>
-<blockquote>
-<p>$ sudo firewall-cmd –permanent -add-port=3690/tcp<br>$ sudo firewall-cmd –reload</p>
-</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo firewall-cmd --permanent -add-port=3690/tcp</span><br><span class="line"> $ sudo firewall-cmd --reload</span><br></pre></td></tr></table></figure>
+
+
+
+
 <ol start="8">
 <li>检索项目和切换项目的url</li>
 </ol>
@@ -219,7 +232,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/17/%E3%80%90svn%E3%80%91%201.CentOS7%20%E7%9A%84svn%E7%AE%80%E5%8D%95%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/" data-id="ck3ib5fvs0001qcts189r5ef7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/17/%E3%80%90svn%E3%80%91%201.CentOS7%20%E7%9A%84svn%E7%AE%80%E5%8D%95%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/" data-id="ck3ibby570003mwtshniued24" class="article-share-link">Share</a>
       
       
     </footer>
@@ -271,7 +284,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/12/%E3%80%90scrapy%E3%80%91%202.scrapy%E8%BF%9B%E9%98%B6%E5%AD%A6%E4%B9%A0%E4%B9%8B%E9%9A%8F%E6%9C%BA%E8%AF%B7%E6%B1%82%E5%A4%B4%E3%80%81%E9%9A%8F%E6%9C%BA%E4%BB%A3%E7%90%86%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BC%82%E6%AD%A5%E5%AD%98%E5%82%A8/" data-id="ck3ib5fyn0003qcts2hhc6js9" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/12/%E3%80%90scrapy%E3%80%91%202.scrapy%E8%BF%9B%E9%98%B6%E5%AD%A6%E4%B9%A0%E4%B9%8B%E9%9A%8F%E6%9C%BA%E8%AF%B7%E6%B1%82%E5%A4%B4%E3%80%81%E9%9A%8F%E6%9C%BA%E4%BB%A3%E7%90%86%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BC%82%E6%AD%A5%E5%AD%98%E5%82%A8/" data-id="ck3ibby4k0001mwts5sze853x" class="article-share-link">Share</a>
       
       
     </footer>
@@ -324,7 +337,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/12/%E3%80%90scrapy%E3%80%91%201.%E4%BD%BF%E7%94%A8scrapy%E6%A1%86%E6%9E%B6%E9%AB%98%E6%95%88%E7%88%AC%E5%8F%96%E6%B1%BD%E8%BD%A6%E4%B9%8B%E5%AE%B6%E5%9B%BE%E7%89%87/" data-id="ck3ib5fvi0000qcts9ku8g1e4" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/12/%E3%80%90scrapy%E3%80%91%201.%E4%BD%BF%E7%94%A8scrapy%E6%A1%86%E6%9E%B6%E9%AB%98%E6%95%88%E7%88%AC%E5%8F%96%E6%B1%BD%E8%BD%A6%E4%B9%8B%E5%AE%B6%E5%9B%BE%E7%89%87/" data-id="ck3ibby4m0002mwts794ledo2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -375,7 +388,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/12/%E3%80%90django%E3%80%91%201.%E4%BD%BF%E7%94%A8django2.0%E5%AE%9E%E7%8E%B0%E5%BF%AB%E9%80%9F%E5%BB%BA%E7%AB%99/" data-id="ck3ib5fwk0002qcts8dcsbjfz" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/12/%E3%80%90django%E3%80%91%201.%E4%BD%BF%E7%94%A8django2.0%E5%AE%9E%E7%8E%B0%E5%BF%AB%E9%80%9F%E5%BB%BA%E7%AB%99/" data-id="ck3ibby490000mwtsg1o082r9" class="article-share-link">Share</a>
       
       
     </footer>
