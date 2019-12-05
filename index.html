@@ -68,6 +68,143 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-【PyQt5】 1.PyQt5入门学习" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/05/%E3%80%90PyQt5%E3%80%91%201.PyQt5%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/" class="article-date">
+  <time datetime="2019-12-05T06:25:48.808Z" itemprop="datePublished">2019-12-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/05/%E3%80%90PyQt5%E3%80%91%201.PyQt5%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/">【PyQt5】 1.PyQt5入门学习</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="一、基本思路结构"><a href="#一、基本思路结构" class="headerlink" title="一、基本思路结构"></a>一、基本思路结构</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1.导入需要的包和模块</span></span><br><span class="line">from PyQt5.Qt import * <span class="comment"># 主要包含了常用的包和模块</span></span><br><span class="line">import sys  <span class="comment"># 通过sys.argv可以获取参数</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 2.创建一个应用程序对象</span></span><br><span class="line">app = QApplication(sys.argv)</span><br><span class="line">app.arguments()     <span class="comment"># 获取参数</span></span><br><span class="line">qApp.arguments()    <span class="comment"># 全局 qApp获取参数</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 3.控件的操作</span></span><br><span class="line"><span class="comment"># 创建控件，设置样式，信号的处理</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 4.应用程序的执行，进行到 消息循环（无限循环），检测整个程序的用户操作交互</span></span><br><span class="line">app.exec_()</span><br></pre></td></tr></table></figure>
+<h5 id="二、第一个PyQt5程序：hello-world"><a href="#二、第一个PyQt5程序：hello-world" class="headerlink" title="二、第一个PyQt5程序：hello world"></a>二、第一个PyQt5程序：hello world</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> PyQt5.Qt <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line">app = QApplication(sys.argv)</span><br><span class="line"></span><br><span class="line">window = QWidget()</span><br><span class="line">window.setWindowTitle(<span class="string">"微博搜索助手"</span>)</span><br><span class="line">window.resize(<span class="number">500</span>,<span class="number">500</span>)</span><br><span class="line">window.move(<span class="number">400</span>,<span class="number">200</span>)</span><br><span class="line"></span><br><span class="line">label = QLabel(window)</span><br><span class="line">label.setText(<span class="string">"hello world"</span>)</span><br><span class="line">label.move(<span class="number">200</span>,<span class="number">200</span>)</span><br><span class="line"></span><br><span class="line">window.show()</span><br><span class="line">sys.exit(app.exec_())</span><br></pre></td></tr></table></figure>
+
+<h6 id="封装成面向对象："><a href="#封装成面向对象：" class="headerlink" title="封装成面向对象："></a>封装成面向对象：</h6><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> PyQt5.Qt <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Window</span><span class="params">(QWidget)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        super().__init__()</span><br><span class="line">        self.setWindowTitle(<span class="string">"学习入门"</span>)</span><br><span class="line">        self.resize(<span class="number">500</span>,<span class="number">500</span>)</span><br><span class="line">        self.setup_ui()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">setup_ui</span><span class="params">(self)</span>:</span></span><br><span class="line">		<span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    <span class="keyword">import</span> sys</span><br><span class="line">    app = QApplication(sys.argv)</span><br><span class="line">    window = Window()</span><br><span class="line">    window.show()</span><br><span class="line">    sys.exit(app.exec_())</span><br></pre></td></tr></table></figure>
+
+<h5 id="设置控件样式："><a href="#设置控件样式：" class="headerlink" title="设置控件样式："></a>设置控件样式：</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">setup_ui</span><span class="params">(self)</span>:</span></span><br><span class="line">	<span class="comment"># 加载外部样式qss</span></span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">"QLabel.qss"</span>,<span class="string">'r'</span>) <span class="keyword">as</span> f:</span><br><span class="line">        qApp.setStyleSheet(f.read())</span><br><span class="line"></span><br><span class="line">    label = QLabel(self)</span><br><span class="line">    label.setObjectName(<span class="string">"labelStyle"</span>)</span><br><span class="line">    label.setProperty(<span class="string">"notice_level"</span>,<span class="string">"warning"</span>)</span><br><span class="line">    label.setText(<span class="string">"文本设置样式"</span>)</span><br><span class="line">    <span class="comment"># 单独设置样式，优先级高于外部加载样式</span></span><br><span class="line">    <span class="comment"># label.setStyleSheet("font-size:20px;color:red;")</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>外部样式文件QLabel.qss:</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">QLabel</span><span class="selector-id">#labelStyle</span> &#123;    </span><br><span class="line">    <span class="attribute">font-size</span>:<span class="number">20</span>;</span><br><span class="line">    <span class="attribute">color</span>:yellow;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">QLabel</span><span class="selector-id">#labelStyle</span><span class="selector-attr">[notice_level="warning"]</span> &#123;    </span><br><span class="line">    <span class="attribute">font-size</span>:<span class="number">40px</span>;</span><br><span class="line">    <span class="attribute">color</span>:red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="设置控件的父子关系："><a href="#设置控件的父子关系：" class="headerlink" title="设置控件的父子关系："></a>设置控件的父子关系：</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">obj1 = QObject()</span><br><span class="line">obj2 = QObject()</span><br><span class="line">obj1.setParent(obj2)	<span class="comment"># 设置obj2为obj1的父对象 一个对象的父对象只有一个，以后设置的为父对象</span></span><br><span class="line">obj1.parent()			<span class="comment"># 查看obj1的父对象</span></span><br><span class="line">obj2.children()			<span class="comment"># 查看obj2的所有的直接子对象</span></span><br><span class="line"><span class="comment"># 参数1：查找的对象类型；参数2：查找的对象名称；参数3：默认是递归查找#（Qt.FindDirectChildrenOnly-&gt;仅查找直接子对象； Qt.FindChildrenRecursively-&gt;递归查找 默认选项）</span></span><br><span class="line">obj1.findChild(参数<span class="number">1</span>，参数<span class="number">2</span>，参数<span class="number">3</span>)	</span><br><span class="line">obj1.findChildren(参数<span class="number">1</span>，参数<span class="number">2</span>，参数<span class="number">3</span>)	<span class="comment"># 查找所有子对象</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="内存管理机制："><a href="#内存管理机制：" class="headerlink" title="内存管理机制："></a>内存管理机制：</h5><blockquote>
+<p>所有的对象都是直接或者间接的继承QObject</p>
+<p>QObject在一个对象树中组织，当创建一个QObject时，如果使用了其他对象作为其父对象，那么他就会添加到父对象的children列表中</p>
+<p>当父对象被销毁时，这么QObject对象就会被销毁，其所有子对象同时也会被销毁</p>
+<p>子控件和父控件的关系：显示受父控件约束，父控件销毁子控件也会销毁</p>
+<p>如果两个控件都没有父控件，那么都会当做单独的顶级控件显示；</p>
+<p>只有顶级控件才能设置标题栏等属性信息；</p>
+</blockquote>
+<h5 id="信号与槽机制："><a href="#信号与槽机制：" class="headerlink" title="信号与槽机制："></a>信号与槽机制：</h5><blockquote>
+<p>基本概念：</p>
+<blockquote>
+<p>信号（Signal）和槽（slot）是Qt中的核心机制，主要用于对象之间进行通讯</p>
+<p>信号：当一个控件的状态发生改变时，向外界发出的信息</p>
+<p>槽：一个执行某些操作的函数或方法</p>
+<p>所有继承自QWidget的控件都支持信号与槽机制</p>
+</blockquote>
+<p>信号：</p>
+<blockquote>
+<p>控件内置的一些 QPushButton().pressed/clicked</p>
+<p>也可以自定义信号：</p>
+</blockquote>
+<p>槽：</p>
+<blockquote>
+<p>不同控件内置的槽函数</p>
+<p>自定义的函数方法</p>
+</blockquote>
+<p>连接方式：</p>
+<blockquote>
+<p>object.信号.connect(槽函数)</p>
+</blockquote>
+<p>特性：</p>
+<blockquote>
+<p>一个信号可以连接多个槽函数</p>
+<p>一个信号也可以连接多个槽函数</p>
+<p>信号的参数可以使任何python类型</p>
+<p>一个槽可以监听多个信号</p>
+</blockquote>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 信号一 演示</span></span><br><span class="line">obj = QObject()</span><br><span class="line">obj.destroyed.connect(<span class="keyword">lambda</span> :print(<span class="string">"对象已被销毁"</span>))</span><br><span class="line"><span class="comment"># ouput：</span></span><br><span class="line"><span class="comment"># 对象已被销毁</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 信号二 演示</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">change</span><span class="params">(name)</span>:</span></span><br><span class="line">	print(<span class="string">"名称发生改变"</span>,name)</span><br><span class="line">obj.objectNameChanged.connect(change)</span><br><span class="line">obj.setObjectName(<span class="string">"名称修改"</span>)</span><br><span class="line"><span class="comment"># ouput：</span></span><br><span class="line"><span class="comment"># 名称发生改变 名称修改</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 断开信号连接</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">change</span><span class="params">(name)</span>:</span></span><br><span class="line">	print(<span class="string">"名称发生改变"</span>,name)</span><br><span class="line">obj.objectNameChanged.connect(change)</span><br><span class="line">obj.setObjectName(<span class="string">"名称修改1"</span>)</span><br><span class="line">obj.objectNameChanged.disconnect()</span><br><span class="line">obj.setObjectName(<span class="string">"名称修改2"</span>)</span><br><span class="line"><span class="comment"># ouput：</span></span><br><span class="line"><span class="comment"># 名称发生改变 名称修改1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 临时断开信号连接和恢复信号连接</span></span><br><span class="line">obj = QObject()</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">change</span><span class="params">(name)</span>:</span></span><br><span class="line">	print(<span class="string">"名称发生改变"</span>,name)</span><br><span class="line">obj.objectNameChanged.connect(change)</span><br><span class="line">obj.setObjectName(<span class="string">"名称修改1"</span>)</span><br><span class="line">obj.blockSignals(<span class="literal">True</span>)      <span class="comment"># 临时阻断信号连接</span></span><br><span class="line">obj.setObjectName(<span class="string">"名称修改2"</span>)</span><br><span class="line">obj.blockSignals(<span class="literal">False</span>)     <span class="comment"># 恢复信号连接</span></span><br><span class="line">obj.setObjectName(<span class="string">"名称修改3"</span>)</span><br><span class="line">obj.SignalsBlocked()		<span class="comment"># 查看连接状态(暂停为True,未暂停未False)</span></span><br><span class="line">obj.obj.receivers(obj.objectNameChanged)	<span class="comment"># 输出当前连接对应槽的数量:1</span></span><br><span class="line"><span class="comment"># ouput：</span></span><br><span class="line"><span class="comment"># 名称发生改变 名称修改1</span></span><br><span class="line"><span class="comment"># 名称发生改变 名称修改3</span></span><br></pre></td></tr></table></figure>
+
+<h5 id=""><a href="#" class="headerlink" title=""></a></h5>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/05/%E3%80%90PyQt5%E3%80%91%201.PyQt5%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/" data-id="ck3sleb8d0000qotshux00kfj" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-【python】 1.使用虚拟环境搭建项目" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/05/%E3%80%90python%E3%80%91%201.%E4%BD%BF%E7%94%A8%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E9%A1%B9%E7%9B%AE/" class="article-date">
+  <time datetime="2019-12-05T05:56:26.372Z" itemprop="datePublished">2019-12-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/05/%E3%80%90python%E3%80%91%201.%E4%BD%BF%E7%94%A8%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E9%A1%B9%E7%9B%AE/">【python】 1.使用虚拟环境搭建项目</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="pipenv安装和虚拟环境的创建"><a href="#pipenv安装和虚拟环境的创建" class="headerlink" title="pipenv安装和虚拟环境的创建"></a>pipenv安装和虚拟环境的创建</h4><h5 id="安装pipenv"><a href="#安装pipenv" class="headerlink" title="安装pipenv"></a>安装pipenv</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install pipenv -i https://pypi.douban.com/simple <span class="comment"># 采用豆瓣源全局安装</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="创建虚拟环境"><a href="#创建虚拟环境" class="headerlink" title="创建虚拟环境"></a>创建虚拟环境</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pipenv --three  <span class="comment"># 采用python3作为虚拟环境编译版本</span></span><br><span class="line">pipenv shell 	<span class="comment"># 打开虚拟环境</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="安装第三方包模块"><a href="#安装第三方包模块" class="headerlink" title="安装第三方包模块"></a>安装第三方包模块</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pipenv install pyqt5</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>直接安装由于直接用的是国外镜像，会出现安装过慢或者安装错误的情况</p>
+<p>解决：修改目录下Pipfile文件source下url地址：</p>
+<p>​            改为国内镜像地址：<a href="https://pypi.douban.com/simple" target="_blank" rel="noopener">https://pypi.douban.com/simple</a>    （豆瓣源）</p>
+<p>​                                               <a href="https://pypi.tuna.tsinghua.edu.cn/simple" target="_blank" rel="noopener">https://pypi.tuna.tsinghua.edu.cn/simple</a>  （清华源）</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/05/%E3%80%90python%E3%80%91%201.%E4%BD%BF%E7%94%A8%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E9%A1%B9%E7%9B%AE/" data-id="ck3sleb9j0002qotsas1h8zuf" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-【php】 1.在CentOS上搭建LNMP环境" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/12/04/%E3%80%90php%E3%80%91%201.%E5%9C%A8CentOS%E4%B8%8A%E6%90%AD%E5%BB%BALNMP%E7%8E%AF%E5%A2%83/" class="article-date">
@@ -148,7 +285,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/04/%E3%80%90php%E3%80%91%201.%E5%9C%A8CentOS%E4%B8%8A%E6%90%AD%E5%BB%BALNMP%E7%8E%AF%E5%A2%83/" data-id="ck3rf55c80000bcts0g9a0byq" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/04/%E3%80%90php%E3%80%91%201.%E5%9C%A8CentOS%E4%B8%8A%E6%90%AD%E5%BB%BALNMP%E7%8E%AF%E5%A2%83/" data-id="ck3slebc50004qotsdbj503df" class="article-share-link">Share</a>
       
       
     </footer>
@@ -322,7 +459,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/17/%E3%80%90svn%E3%80%91%201.CentOS7%20%E7%9A%84svn%E7%AE%80%E5%8D%95%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/" data-id="ck3rf55eq0004bcts8jsqezxj" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/17/%E3%80%90svn%E3%80%91%201.CentOS7%20%E7%9A%84svn%E7%AE%80%E5%8D%95%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/" data-id="ck3slebc30003qots0kpm095y" class="article-share-link">Share</a>
       
       
     </footer>
@@ -374,7 +511,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/12/%E3%80%90scrapy%E3%80%91%202.scrapy%E8%BF%9B%E9%98%B6%E5%AD%A6%E4%B9%A0%E4%B9%8B%E9%9A%8F%E6%9C%BA%E8%AF%B7%E6%B1%82%E5%A4%B4%E3%80%81%E9%9A%8F%E6%9C%BA%E4%BB%A3%E7%90%86%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BC%82%E6%AD%A5%E5%AD%98%E5%82%A8/" data-id="ck3rf55eb0002bctsfi9833p0" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/12/%E3%80%90scrapy%E3%80%91%202.scrapy%E8%BF%9B%E9%98%B6%E5%AD%A6%E4%B9%A0%E4%B9%8B%E9%9A%8F%E6%9C%BA%E8%AF%B7%E6%B1%82%E5%A4%B4%E3%80%81%E9%9A%8F%E6%9C%BA%E4%BB%A3%E7%90%86%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BC%82%E6%AD%A5%E5%AD%98%E5%82%A8/" data-id="ck3slebc60005qotshtsz9mwd" class="article-share-link">Share</a>
       
       
     </footer>
@@ -427,58 +564,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/12/%E3%80%90scrapy%E3%80%91%201.%E4%BD%BF%E7%94%A8scrapy%E6%A1%86%E6%9E%B6%E9%AB%98%E6%95%88%E7%88%AC%E5%8F%96%E6%B1%BD%E8%BD%A6%E4%B9%8B%E5%AE%B6%E5%9B%BE%E7%89%87/" data-id="ck3rf55dq0001bctsbh84bzpb" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-【django】 1.使用django2.0实现快速建站" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/11/12/%E3%80%90django%E3%80%91%201.%E4%BD%BF%E7%94%A8django2.0%E5%AE%9E%E7%8E%B0%E5%BF%AB%E9%80%9F%E5%BB%BA%E7%AB%99/" class="article-date">
-  <time datetime="2019-11-12T08:14:51.503Z" itemprop="datePublished">2019-11-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/12/%E3%80%90django%E3%80%91%201.%E4%BD%BF%E7%94%A8django2.0%E5%AE%9E%E7%8E%B0%E5%BF%AB%E9%80%9F%E5%BB%BA%E7%AB%99/">【django】 1.使用django2.0实现快速建站</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、django安装与配置"><a href="#一、django安装与配置" class="headerlink" title="一、django安装与配置"></a>一、django安装与配置</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装django</span></span><br><span class="line">pip3 install django==2.0.2</span><br><span class="line"><span class="comment"># 新建项目</span></span><br><span class="line"><span class="built_in">cd</span> desktop</span><br><span class="line">django-admin startproject wordcount</span><br><span class="line"><span class="comment"># 启动项目</span></span><br><span class="line">python manage.py runserver</span><br></pre></td></tr></table></figure>
-
-<h3 id="settings-py开启下载中间件"><a href="#settings-py开启下载中间件" class="headerlink" title="settings.py开启下载中间件"></a>settings.py开启下载中间件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DOWNLOADER_MIDDLEWARES = &#123;</span><br><span class="line">   <span class="string">'BmwImages.middlewares.BmwimagesDownloaderMiddleware'</span>: 543,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="二、设置随机代理中间件"><a href="#二、设置随机代理中间件" class="headerlink" title="二、设置随机代理中间件"></a>二、设置随机代理中间件</h2><h3 id="修改middlewares-py中间件内容"><a href="#修改middlewares-py中间件内容" class="headerlink" title="修改middlewares.py中间件内容"></a>修改middlewares.py中间件内容</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import random</span><br><span class="line">def process_request(self, request, spider):</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 设置IP代理中间件</span></span><br><span class="line">    <span class="comment"># 如果购买的是代理ip，会得到代理ip及端口列表</span></span><br><span class="line">    proxy_list = []</span><br><span class="line">    proxy = random.choice(proxy_list)</span><br><span class="line">    request.meta[<span class="string">'proxy'</span>] = proxy</span><br></pre></td></tr></table></figure>
-
-<h3 id="settings-py开启下载中间件-1"><a href="#settings-py开启下载中间件-1" class="headerlink" title="settings.py开启下载中间件"></a>settings.py开启下载中间件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DOWNLOADER_MIDDLEWARES = &#123;</span><br><span class="line">   <span class="string">'BmwImages.middlewares.BmwimagesDownloaderMiddleware'</span>: 543,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="爬取数据存入数据库"><a href="#爬取数据存入数据库" class="headerlink" title="爬取数据存入数据库"></a>爬取数据存入数据库</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">import pymysql</span><br><span class="line"></span><br><span class="line">class JsPipeline(object):</span><br><span class="line">    def __init__(self):</span><br><span class="line">        dbparams = &#123;</span><br><span class="line">            <span class="string">'host'</span>: <span class="string">'127.0.0.1'</span>,</span><br><span class="line">            <span class="string">'port'</span>: 3306,</span><br><span class="line">            <span class="string">'user'</span>: <span class="string">'root'</span>,</span><br><span class="line">            <span class="string">'password'</span>: <span class="string">'root'</span>,</span><br><span class="line">            <span class="string">'database'</span>: <span class="string">'jianshu'</span>,</span><br><span class="line">            <span class="string">'charset'</span>: <span class="string">'utf8'</span></span><br><span class="line">        &#125;</span><br><span class="line">        self.conn = pymysql.connect(**dbparams)</span><br><span class="line">        self.cursor = self.conn.cursor()</span><br><span class="line"></span><br><span class="line">    def process_item(self, item, spider):</span><br><span class="line">        sql = <span class="string">"INSERT INTO `article` (`title`) VALUES ('%s')"</span>%item[<span class="string">'title'</span>]</span><br><span class="line">        self.cursor.execute(sql)</span><br><span class="line">        self.conn.commit()</span><br><span class="line">        <span class="built_in">return</span> item</span><br></pre></td></tr></table></figure>
-
-<h3 id="修改成爬取异步存储"><a href="#修改成爬取异步存储" class="headerlink" title="修改成爬取异步存储"></a>修改成爬取异步存储</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">from pymysql import cursors</span><br><span class="line">from twisted.enterprise import adbapi</span><br><span class="line"></span><br><span class="line">class JsTwistedPipeline(object):</span><br><span class="line"></span><br><span class="line">    def __init__(self):</span><br><span class="line">        dbparams = &#123;</span><br><span class="line">            <span class="string">'host'</span>: <span class="string">'127.0.0.1'</span>,</span><br><span class="line">            <span class="string">'port'</span>: 3306,</span><br><span class="line">            <span class="string">'user'</span>: <span class="string">'root'</span>,</span><br><span class="line">            <span class="string">'password'</span>: <span class="string">'root'</span>,</span><br><span class="line">            <span class="string">'database'</span>: <span class="string">'jianshu'</span>,</span><br><span class="line">            <span class="string">'charset'</span>: <span class="string">'utf8'</span>,</span><br><span class="line">            <span class="string">'cursorclass'</span>:cursors.DictCursor</span><br><span class="line">        &#125;</span><br><span class="line">        self.dbpool = adbapi.ConnectionPool(<span class="string">'pymysql'</span>,**dbparams)</span><br><span class="line"></span><br><span class="line">    def process_item(self, item, spider):</span><br><span class="line">        sql = <span class="string">"INSERT INTO `article` (`title`) VALUES ('%s')"</span>%item[<span class="string">'title'</span>]</span><br><span class="line">        defer = self.dbpool.runInteraction(self.insert_item,item)</span><br><span class="line">        defer.addErrback(self.handle_error,item,spider)</span><br><span class="line">        <span class="built_in">return</span> item</span><br><span class="line"></span><br><span class="line">    def insert_item(self,cursor,item):</span><br><span class="line">        sql = <span class="string">"INSERT INTO `article` (`title`) VALUES ('%s')"</span>%item[<span class="string">'title'</span>]</span><br><span class="line">        cursor.execute(sql)</span><br><span class="line"></span><br><span class="line">    def handle_error(self,error,item,spider):</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">'='</span>*10+<span class="string">"error"</span>+<span class="string">"="</span>*10)</span><br><span class="line">        <span class="built_in">print</span>(error)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">'='</span>*10+<span class="string">"error"</span>+<span class="string">"="</span>*10)</span><br></pre></td></tr></table></figure>
-
-<h3 id="使用selenium-webdriver爬取ajax请求的数据"><a href="#使用selenium-webdriver爬取ajax请求的数据" class="headerlink" title="使用selenium+webdriver爬取ajax请求的数据"></a>使用selenium+webdriver爬取ajax请求的数据</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">from selenium import webdriver</span><br><span class="line">from scrapy.http import HtmlResponse</span><br><span class="line">import time</span><br><span class="line"></span><br><span class="line">class JsSeleniumWebDriverMiddleware(object):</span><br><span class="line"></span><br><span class="line">    def __init__(self):</span><br><span class="line">        driver_path = r<span class="string">"D:\python\scrapy\study\20191009\chromedriver\chromedriver2-0.exe"</span></span><br><span class="line">        self.driver = webdriver.Chrome(executable_path=driver_path)</span><br><span class="line"></span><br><span class="line">    def process_request(self, request, spider):</span><br><span class="line">        self.driver.get(request.url)</span><br><span class="line">        time.sleep(1)</span><br><span class="line">        try:</span><br><span class="line">            <span class="keyword">while</span> True:</span><br><span class="line">                showmore = self.driver.find_element_by_xpath(<span class="string">"更多"</span>)</span><br><span class="line">                showmore.click()</span><br><span class="line">                time.sleep(0.3)</span><br><span class="line">                <span class="keyword">if</span> not showmore:</span><br><span class="line">                    <span class="built_in">break</span></span><br><span class="line">        except:</span><br><span class="line">            pass</span><br><span class="line"></span><br><span class="line">        <span class="built_in">source</span> = self.driver.page_source</span><br><span class="line">        response = HtmlResponse(url=self.driver.current_url,body=<span class="built_in">source</span>,request=request,encoding=<span class="string">'utf-8'</span>)</span><br><span class="line">        <span class="built_in">return</span> response</span><br></pre></td></tr></table></figure>
-
-<h3 id="开启selenium-webdriver中间件"><a href="#开启selenium-webdriver中间件" class="headerlink" title="开启selenium+webdriver中间件"></a>开启selenium+webdriver中间件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">DOWNLOADER_MIDDLEWARES = &#123;</span><br><span class="line">   <span class="string">'BmwImages.middlewares.JsSeleniumWebDriverMiddleware'</span>: 543,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/12/%E3%80%90django%E3%80%91%201.%E4%BD%BF%E7%94%A8django2.0%E5%AE%9E%E7%8E%B0%E5%BF%AB%E9%80%9F%E5%BB%BA%E7%AB%99/" data-id="ck3rf55en0003bcts2x427n1z" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/12/%E3%80%90scrapy%E3%80%91%201.%E4%BD%BF%E7%94%A8scrapy%E6%A1%86%E6%9E%B6%E9%AB%98%E6%95%88%E7%88%AC%E5%8F%96%E6%B1%BD%E8%BD%A6%E4%B9%8B%E5%AE%B6%E5%9B%BE%E7%89%87/" data-id="ck3sleb9h0001qots17vea0zj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -519,6 +605,14 @@
       <ul>
         
           <li>
+            <a href="/2019/12/05/%E3%80%90PyQt5%E3%80%91%201.PyQt5%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/">【PyQt5】 1.PyQt5入门学习</a>
+          </li>
+        
+          <li>
+            <a href="/2019/12/05/%E3%80%90python%E3%80%91%201.%E4%BD%BF%E7%94%A8%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E9%A1%B9%E7%9B%AE/">【python】 1.使用虚拟环境搭建项目</a>
+          </li>
+        
+          <li>
             <a href="/2019/12/04/%E3%80%90php%E3%80%91%201.%E5%9C%A8CentOS%E4%B8%8A%E6%90%AD%E5%BB%BALNMP%E7%8E%AF%E5%A2%83/">【php】 1.在CentOS上搭建LNMP环境</a>
           </li>
         
@@ -528,14 +622,6 @@
         
           <li>
             <a href="/2019/11/12/%E3%80%90scrapy%E3%80%91%202.scrapy%E8%BF%9B%E9%98%B6%E5%AD%A6%E4%B9%A0%E4%B9%8B%E9%9A%8F%E6%9C%BA%E8%AF%B7%E6%B1%82%E5%A4%B4%E3%80%81%E9%9A%8F%E6%9C%BA%E4%BB%A3%E7%90%86%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BC%82%E6%AD%A5%E5%AD%98%E5%82%A8/">【scrapy】 2.scrapy进阶学习之随机请求头、随机代理和数据异步存储</a>
-          </li>
-        
-          <li>
-            <a href="/2019/11/12/%E3%80%90scrapy%E3%80%91%201.%E4%BD%BF%E7%94%A8scrapy%E6%A1%86%E6%9E%B6%E9%AB%98%E6%95%88%E7%88%AC%E5%8F%96%E6%B1%BD%E8%BD%A6%E4%B9%8B%E5%AE%B6%E5%9B%BE%E7%89%87/">【scrapy】 1.使用scrapy框架高效爬取汽车之家图片</a>
-          </li>
-        
-          <li>
-            <a href="/2019/11/12/%E3%80%90django%E3%80%91%201.%E4%BD%BF%E7%94%A8django2.0%E5%AE%9E%E7%8E%B0%E5%BF%AB%E9%80%9F%E5%BB%BA%E7%AB%99/">【django】 1.使用django2.0实现快速建站</a>
           </li>
         
       </ul>
