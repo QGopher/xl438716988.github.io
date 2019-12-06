@@ -68,6 +68,54 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-【mysql】 1.mysql基础入门" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/12/06/%E3%80%90mysql%E3%80%91%201.mysql%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8/" class="article-date">
+  <time datetime="2019-12-06T14:00:23.694Z" itemprop="datePublished">2019-12-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/12/06/%E3%80%90mysql%E3%80%91%201.mysql%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8/">【mysql】 1.mysql基础入门</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="一、mysql基础入门"><a href="#一、mysql基础入门" class="headerlink" title="一、mysql基础入门"></a>一、mysql基础入门</h3><ol>
+<li><h4 id="常见函数"><a href="#常见函数" class="headerlink" title="常见函数"></a>常见函数</h4></li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">类似与java的方法,将一组逻辑语句封装在方法体中,对外暴露方法名</span><br><span class="line">好处：隐藏了实现细节；提高代码的重用性</span><br><span class="line">调用：select 函数名(实参列表) from 表名；</span><br><span class="line">特点：叫什么（函数名）；干什么（函数功能）</span><br><span class="line">分类：1.单行函数：如-contact lenth ifnull等</span><br><span class="line">	 2.多行函数：功能:做统计使用,又称为统计函数,聚合函数,组函数</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>单行函数：字符函数、数学函数、日期函数、其他函数、流程控制函数字符函数</li>
+</ul>
+<h5 id="字符函数："><a href="#字符函数：" class="headerlink" title="字符函数："></a>字符函数：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"># 1.length 获取参数值的字节个数</span><br><span class="line">select length(&apos;tom&apos;)	# 3</span><br><span class="line"># 2.contact 拼接字符串</span><br><span class="line">select contact(last_name,&apos;-&apos;,first_name) as 姓名 from user;</span><br><span class="line"># 3.upper、lower 大小写转换</span><br><span class="line">select upper(&apos;Tom&apos;)</span><br><span class="line">select lower(&apos;Tom&apos;)</span><br><span class="line"># 4.substr、substring 截取参数值</span><br><span class="line">select substr(string,position,length) output; # 索引从1开始</span><br><span class="line"># 5.instr	获取参数的某字符的开始位置,如果找不到返回0</span><br><span class="line">select instr(&quot;你好我是一个傻子&quot;,&apos;傻子&apos;)	#7</span><br><span class="line"># 6.trim 去掉字符串的两端空格</span><br><span class="line">select trim(&quot;  Tim    &quot;) as name;	# 去掉两端空格</span><br><span class="line">select trim(&apos;a&apos; from &apos;aaaaaaaaaaaa你好aaaaa你好aaaaaaa&apos;) as output # 去掉两端的a字符</span><br><span class="line"># 7.lpad  用指定的字符实现左填充,超过会从右截断</span><br><span class="line">select lpad(&apos;我是&apos;,10,‘*’) as output</span><br><span class="line"># 8.rpad  用指定的字符实现右填充,超过会从右截断</span><br><span class="line">select rpad(&apos;我是一个傻子&apos;,10,‘*’) as output</span><br><span class="line"># 9.replace  替换字符串</span><br><span class="line">select replace(&apos;张无忌爱上了周芷若&apos;,&apos;周芷若&apos;,&apos;赵敏&apos;)</span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/12/06/%E3%80%90mysql%E3%80%91%201.mysql%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8/" data-id="ck3u9xodk00004otsfb6h1c1z" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-【PyQt5】 1.PyQt5入门学习" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/12/05/%E3%80%90PyQt5%E3%80%91%201.PyQt5%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/" class="article-date">
@@ -130,11 +178,21 @@
 
 一个槽可以监听多个信号</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 信号一 演示</span></span><br><span class="line">obj = QObject()</span><br><span class="line">obj.destroyed.connect(<span class="keyword">lambda</span> :print(<span class="string">"对象已被销毁"</span>))</span><br><span class="line"><span class="comment"># ouput：</span></span><br><span class="line"><span class="comment"># 对象已被销毁</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 信号二 演示</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">change</span><span class="params">(name)</span>:</span></span><br><span class="line">	print(<span class="string">"名称发生改变"</span>,name)</span><br><span class="line">obj.objectNameChanged.connect(change)</span><br><span class="line">obj.setObjectName(<span class="string">"名称修改"</span>)</span><br><span class="line"><span class="comment"># ouput：</span></span><br><span class="line"><span class="comment"># 名称发生改变 名称修改</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 断开信号连接</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">change</span><span class="params">(name)</span>:</span></span><br><span class="line">	print(<span class="string">"名称发生改变"</span>,name)</span><br><span class="line">obj.objectNameChanged.connect(change)</span><br><span class="line">obj.setObjectName(<span class="string">"名称修改1"</span>)</span><br><span class="line">obj.objectNameChanged.disconnect()</span><br><span class="line">obj.setObjectName(<span class="string">"名称修改2"</span>)</span><br><span class="line"><span class="comment"># ouput：</span></span><br><span class="line"><span class="comment"># 名称发生改变 名称修改1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 临时断开信号连接和恢复信号连接</span></span><br><span class="line">obj = QObject()</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">change</span><span class="params">(name)</span>:</span></span><br><span class="line">	print(<span class="string">"名称发生改变"</span>,name)</span><br><span class="line">obj.objectNameChanged.connect(change)</span><br><span class="line">obj.setObjectName(<span class="string">"名称修改1"</span>)</span><br><span class="line">obj.blockSignals(<span class="literal">True</span>)      <span class="comment"># 临时阻断信号连接</span></span><br><span class="line">obj.setObjectName(<span class="string">"名称修改2"</span>)</span><br><span class="line">obj.blockSignals(<span class="literal">False</span>)     <span class="comment"># 恢复信号连接</span></span><br><span class="line">obj.setObjectName(<span class="string">"名称修改3"</span>)</span><br><span class="line">obj.SignalsBlocked()		<span class="comment"># 查看连接状态(暂停为True,未暂停未False)</span></span><br><span class="line">obj.obj.receivers(obj.objectNameChanged)	<span class="comment"># 输出当前连接对应槽的数量:1</span></span><br><span class="line"><span class="comment"># ouput：</span></span><br><span class="line"><span class="comment"># 名称发生改变 名称修改1</span></span><br><span class="line"><span class="comment"># 名称发生改变 名称修改3</span></span><br></pre></td></tr></table></figure>
 
-<h5 id=""><a href="#" class="headerlink" title=""></a></h5>
+<h5 id="QObject-类型判定"><a href="#QObject-类型判定" class="headerlink" title="QObject 类型判定"></a>QObject 类型判定</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">obj = QObject()</span><br><span class="line">w = QWidget()</span><br><span class="line">btn = QPushButton()</span><br><span class="line">label = QLabel()</span><br><span class="line">objs = [obj,w,btn,label]</span><br><span class="line">for o in objs:</span><br><span class="line">	print(o.isWidgetType())		# 是否是控件类型</span><br><span class="line">	# print(o.inherits(&apos;QWidget&apos;))# 是否是控件类型</span><br><span class="line"># output:</span><br><span class="line"># False</span><br><span class="line"># True</span><br><span class="line"># True</span><br><span class="line"># True</span><br></pre></td></tr></table></figure>
+
+<h5 id="对象删除-obj-deleteLater"><a href="#对象删除-obj-deleteLater" class="headerlink" title="对象删除 obj.deleteLater():"></a>对象删除 obj.deleteLater():</h5><ol>
+<li>删除一个对象时，也会接触它与父对象之间的关系</li>
+<li>并没有将对象立即销毁，而是向主消息循环发送了一个event，下次主循环循环收到这个event之后才会销毁对象</li>
+<li>这样做额好处是可以在这些延迟删除的时间内完成一些操作，坏处就是内存释放会不及时</li>
+</ol>
+<p>应用场景：想要移除某个对象时候使用</p>
+<h5 id="定时器"><a href="#定时器" class="headerlink" title="定时器"></a>定时器</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class MyObject(QObject):</span><br><span class="line">	def timerEvent(self,evt):</span><br><span class="line">		print(evt,&quot;1&quot;)</span><br><span class="line"></span><br><span class="line">obj = MyObject()</span><br><span class="line">timer_id = obj.startTimer(1000)	# 开启定时器</span><br><span class="line">obj.killTimer(timer_id)			# 删除定时器</span><br></pre></td></tr></table></figure>
+
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/05/%E3%80%90PyQt5%E3%80%91%201.PyQt5%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/" data-id="ck3sllgwz0000zgts5cafc1be" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/05/%E3%80%90PyQt5%E3%80%91%201.PyQt5%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/" data-id="ck3u9xoe600014ots8eveb69m" class="article-share-link">Share</a>
       
       
     </footer>
@@ -182,7 +240,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/05/%E3%80%90python%E3%80%91%201.%E4%BD%BF%E7%94%A8%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E9%A1%B9%E7%9B%AE/" data-id="ck3sllgxo0001zgts7uw130ev" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/05/%E3%80%90python%E3%80%91%201.%E4%BD%BF%E7%94%A8%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E9%A1%B9%E7%9B%AE/" data-id="ck3u9xogz00034ots5gx66geb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -272,7 +330,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/04/%E3%80%90php%E3%80%91%201.%E5%9C%A8CentOS%E4%B8%8A%E6%90%AD%E5%BB%BALNMP%E7%8E%AF%E5%A2%83/" data-id="ck3sllgxw0002zgtscigy3hvw" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/04/%E3%80%90php%E3%80%91%201.%E5%9C%A8CentOS%E4%B8%8A%E6%90%AD%E5%BB%BALNMP%E7%8E%AF%E5%A2%83/" data-id="ck3u9xoi600054otshdvid0f5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -446,7 +504,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/17/%E3%80%90svn%E3%80%91%201.CentOS7%20%E7%9A%84svn%E7%AE%80%E5%8D%95%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/" data-id="ck3sllgxx0003zgtsd6qo5hz7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/17/%E3%80%90svn%E3%80%91%201.CentOS7%20%E7%9A%84svn%E7%AE%80%E5%8D%95%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/" data-id="ck3u9xoec00024otscwy9e3im" class="article-share-link">Share</a>
       
       
     </footer>
@@ -498,7 +556,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/12/%E3%80%90scrapy%E3%80%91%202.scrapy%E8%BF%9B%E9%98%B6%E5%AD%A6%E4%B9%A0%E4%B9%8B%E9%9A%8F%E6%9C%BA%E8%AF%B7%E6%B1%82%E5%A4%B4%E3%80%81%E9%9A%8F%E6%9C%BA%E4%BB%A3%E7%90%86%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BC%82%E6%AD%A5%E5%AD%98%E5%82%A8/" data-id="ck3sllgym0005zgts9yryho82" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/12/%E3%80%90scrapy%E3%80%91%202.scrapy%E8%BF%9B%E9%98%B6%E5%AD%A6%E4%B9%A0%E4%B9%8B%E9%9A%8F%E6%9C%BA%E8%AF%B7%E6%B1%82%E5%A4%B4%E3%80%81%E9%9A%8F%E6%9C%BA%E4%BB%A3%E7%90%86%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BC%82%E6%AD%A5%E5%AD%98%E5%82%A8/" data-id="ck3u9xoi900064otsbe8gh1v9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -551,7 +609,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/12/%E3%80%90scrapy%E3%80%91%201.%E4%BD%BF%E7%94%A8scrapy%E6%A1%86%E6%9E%B6%E9%AB%98%E6%95%88%E7%88%AC%E5%8F%96%E6%B1%BD%E8%BD%A6%E4%B9%8B%E5%AE%B6%E5%9B%BE%E7%89%87/" data-id="ck3sllgyl0004zgtsa5oi7nks" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/12/%E3%80%90scrapy%E3%80%91%201.%E4%BD%BF%E7%94%A8scrapy%E6%A1%86%E6%9E%B6%E9%AB%98%E6%95%88%E7%88%AC%E5%8F%96%E6%B1%BD%E8%BD%A6%E4%B9%8B%E5%AE%B6%E5%9B%BE%E7%89%87/" data-id="ck3u9xohu00044otsajh51gcx" class="article-share-link">Share</a>
       
       
     </footer>
@@ -592,6 +650,10 @@
       <ul>
         
           <li>
+            <a href="/2019/12/06/%E3%80%90mysql%E3%80%91%201.mysql%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8/">【mysql】 1.mysql基础入门</a>
+          </li>
+        
+          <li>
             <a href="/2019/12/05/%E3%80%90PyQt5%E3%80%91%201.PyQt5%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/">【PyQt5】 1.PyQt5入门学习</a>
           </li>
         
@@ -605,10 +667,6 @@
         
           <li>
             <a href="/2019/11/17/%E3%80%90svn%E3%80%91%201.CentOS7%20%E7%9A%84svn%E7%AE%80%E5%8D%95%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/">【svn】 1.CentOS7 的svn简单安装与使用</a>
-          </li>
-        
-          <li>
-            <a href="/2019/11/12/%E3%80%90scrapy%E3%80%91%202.scrapy%E8%BF%9B%E9%98%B6%E5%AD%A6%E4%B9%A0%E4%B9%8B%E9%9A%8F%E6%9C%BA%E8%AF%B7%E6%B1%82%E5%A4%B4%E3%80%81%E9%9A%8F%E6%9C%BA%E4%BB%A3%E7%90%86%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BC%82%E6%AD%A5%E5%AD%98%E5%82%A8/">【scrapy】 2.scrapy进阶学习之随机请求头、随机代理和数据异步存储</a>
           </li>
         
       </ul>
