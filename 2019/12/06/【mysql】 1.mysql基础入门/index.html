@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="Completion is more important than perfection">
 <meta property="og:description" content="一、mysql基础入门 常见函数  123456类似与java的方法,将一组逻辑语句封装在方法体中,对外暴露方法名好处：隐藏了实现细节；提高代码的重用性调用：select 函数名(实参列表) from 表名；特点：叫什么（函数名）；干什么（函数功能）分类：1.单行函数：如-contact lenth ifnull等	 2.多行函数：功能:做统计使用,又称为统计函数,聚合函数,组函数   单行函数：">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-12-06T14:56:21.391Z">
+<meta property="og:updated_time" content="2019-12-07T01:58:52.677Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="Completion is more important than perfection" type="application/atom+xml">
@@ -99,13 +99,15 @@
 </ul>
 <h5 id="字符函数："><a href="#字符函数：" class="headerlink" title="字符函数："></a>字符函数：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"># 1.length 获取参数值的字节个数</span><br><span class="line">select length(&apos;tom&apos;)	# 3</span><br><span class="line"># 2.contact 拼接字符串</span><br><span class="line">select contact(last_name,&apos;-&apos;,first_name) as 姓名 from user;</span><br><span class="line"># 3.upper、lower 大小写转换</span><br><span class="line">select upper(&apos;Tom&apos;)</span><br><span class="line">select lower(&apos;Tom&apos;)</span><br><span class="line"># 4.substr、substring 截取参数值</span><br><span class="line">select substr(string,position,length) output; # 索引从1开始</span><br><span class="line"># 5.instr	获取参数的某字符的开始位置,如果找不到返回0</span><br><span class="line">select instr(&quot;你好我是一个傻子&quot;,&apos;傻子&apos;)	#7</span><br><span class="line"># 6.trim 去掉字符串的两端空格</span><br><span class="line">select trim(&quot;  Tim    &quot;) as name;	# 去掉两端空格</span><br><span class="line">select trim(&apos;a&apos; from &apos;aaaaaaaaaaaa你好aaaaa你好aaaaaaa&apos;) as output # 去掉两端的a字符</span><br><span class="line"># 7.lpad  用指定的字符实现左填充,超过会从右截断</span><br><span class="line">select lpad(&apos;我是&apos;,10,‘*’) as output</span><br><span class="line"># 8.rpad  用指定的字符实现右填充,超过会从右截断</span><br><span class="line">select rpad(&apos;我是一个傻子&apos;,10,‘*’) as output</span><br><span class="line"># 9.replace  替换字符串</span><br><span class="line">select replace(&apos;张无忌爱上了周芷若&apos;,&apos;周芷若&apos;,&apos;赵敏&apos;)</span><br></pre></td></tr></table></figure>
 
+<h5 id="数学函数："><a href="#数学函数：" class="headerlink" title="数学函数："></a>数学函数：</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># 1.round 四舍五入</span><br><span class="line">select round(1.65)		# 2</span><br><span class="line">select round(1.568,2)	# 小数点后保留两位 1.57</span><br><span class="line"># 2.ceil 向上取整(返回大于等于参数的最小整数)</span><br><span class="line">select ceil(1.00)		# 1</span><br><span class="line">select ceil(0.01)		# 1</span><br><span class="line"># 3.floor 向下取整(返回小于等于参数的最大整数)</span><br><span class="line">select floor(-9.99)     # -10</span><br><span class="line"># 4.truncate 截断</span><br><span class="line">select truncate(1.65,1) # 1.6 小数点后保留一位</span><br><span class="line"># 5.mod 取余  mod(a,b) a-a/b*b</span><br><span class="line">select mod(10,3)		# 1</span><br><span class="line">select mod(-10,-3)		# -1  被除数为正则正</span><br><span class="line">select mod(10,-3)		# 1   被除数为负则负</span><br></pre></td></tr></table></figure>
 
+<h5 id="日期函数"><a href="#日期函数" class="headerlink" title="日期函数:"></a>日期函数:</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"># 1.now 返回当前系统日期+时间</span><br><span class="line">select now();</span><br><span class="line"># 2.curdate 返回当前系统日期，不包含时间</span><br><span class="line">select curdate();</span><br><span class="line"># 3.curtime 返回当前时间，不包含日期</span><br><span class="line">select curtime();</span><br><span class="line"># 4.可以获取指定的部分，年，月，日，时，分，秒等等</span><br><span class="line">select year(now()) 年;</span><br><span class="line">select year(&apos;1998-01-01&apos;) 年;</span><br><span class="line">select month(&apos;1998-01-01&apos;) 月;		</span><br><span class="line">select monthname(&apos;1998-01-01&apos;) 月;	# 出现月份的英文</span><br><span class="line"># str_to_date:将日期格式的字符转换成指定格式的日期</span><br><span class="line">str_to_date(&apos;9-13-1999&apos;,&apos;%m-%d-%Y&apos;);</span><br><span class="line">%Y  4位的年份  %y 2位的年份</span><br><span class="line">%m  月份(01,02....)</span><br><span class="line">%c  月份(1,2,3....)</span><br><span class="line">%d  日(01,02...)</span><br><span class="line">%H  小时(24小时制)</span><br><span class="line">%h  小时(12小时制)</span><br><span class="line">%i  分钟(00,01,02...)</span><br><span class="line">%s  秒(00,01,02)</span><br></pre></td></tr></table></figure>
 
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/06/%E3%80%90mysql%E3%80%91%201.mysql%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8/" data-id="ck3u9xodk00004otsfb6h1c1z" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/06/%E3%80%90mysql%E3%80%91%201.mysql%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8/" data-id="ck3uxm0650000dkts7t451xs3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -113,6 +115,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2019/12/07/%E3%80%90mysql%E3%80%91%202.mysql%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8(%E5%85%A8)/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          【mysql】 2.mysql基础入门(全)
+        
+      </div>
+    </a>
   
   
     <a href="/2019/12/05/%E3%80%90PyQt5%E3%80%91%201.PyQt5%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/" id="article-nav-older" class="article-nav-link-wrap">
@@ -154,6 +165,10 @@
       <ul>
         
           <li>
+            <a href="/2019/12/07/%E3%80%90mysql%E3%80%91%202.mysql%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8(%E5%85%A8)/">【mysql】 2.mysql基础入门(全)</a>
+          </li>
+        
+          <li>
             <a href="/2019/12/06/%E3%80%90mysql%E3%80%91%201.mysql%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8/">【mysql】 1.mysql基础入门</a>
           </li>
         
@@ -167,10 +182,6 @@
         
           <li>
             <a href="/2019/12/04/%E3%80%90php%E3%80%91%201.%E5%9C%A8CentOS%E4%B8%8A%E6%90%AD%E5%BB%BALNMP%E7%8E%AF%E5%A2%83/">【php】 1.在CentOS上搭建LNMP环境</a>
-          </li>
-        
-          <li>
-            <a href="/2019/11/17/%E3%80%90svn%E3%80%91%201.CentOS7%20%E7%9A%84svn%E7%AE%80%E5%8D%95%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/">【svn】 1.CentOS7 的svn简单安装与使用</a>
           </li>
         
       </ul>
