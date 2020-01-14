@@ -98,10 +98,10 @@
 <p>可能学习各有各的方法！我以前就是那样子过来的！现在呢，还是要继续的学习与提升技能，活到老学到老！一旦进坑了，很难出来！</p>
 <p>以下推荐一些面试常见的试题，希望对你有用！！</p>
 <p><strong>1、冒泡排序，面试前一定要记住哦！</strong></p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`<span class="function"><span class="keyword">function</span>` `<span class="title">maopao</span><span class="params">(``$arr``)</span>``</span>&#123;``    ``$len` `= ``count``(``$arr``);``    ``$n` `= ``count``(``$arr``) - <span class="number">1</span>;``    ``<span class="keyword">for</span>` `(``$i` `= <span class="number">0</span>; ``$i` `&lt; ``$len``; ``$i``++) &#123;``        ``<span class="keyword">for</span>` `(``$j` `= <span class="number">0</span>; ``$j` `&lt; ``$n``; ``$j``++) &#123;``            ``<span class="keyword">if</span>` `(``$arr``[``$j``] &gt; ``$arr``[``$j` `+ <span class="number">1</span>]) &#123;``                ``$tmp` `= ``$arr``[``$j``];``                ``$arr``[``$j``] = ``$arr``[``$j` `+ <span class="number">1</span>];``                ``$arr``[``$j` `+ <span class="number">1</span>] = ``$tmp``;``            ``&#125;``        ``&#125;``    ``&#125;``    ``<span class="keyword">return</span>` `$arr``;``&#125;`</span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">maopao</span><span class="params">($arr)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    $len = count($arr);</span><br><span class="line">    $n = count($arr) - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> ($i = <span class="number">0</span>; $i &lt; $len; $i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> ($j = <span class="number">0</span>; $j &lt; $n; $j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> ($arr[$j] &gt; $arr[$j + <span class="number">1</span>]) &#123;</span><br><span class="line">                $tmp = $arr[$j];</span><br><span class="line">                $arr[$j] = $arr[$j + <span class="number">1</span>];</span><br><span class="line">                $arr[$j + <span class="number">1</span>] = $tmp;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> $arr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><strong>2、快速排序，面试前一定要记住哦！</strong></p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`<span class="function"><span class="keyword">function</span>` `<span class="title">quick_sort</span><span class="params">(``$array``)</span> </span>&#123;``    ``<span class="keyword">if</span>` `(``count``(``$array``) &lt;= <span class="number">1</span>) ``<span class="keyword">return</span>` `$array``;``    ``$key` `= ``$array``[<span class="number">0</span>];``    ``$left_arr` `= ``<span class="keyword">array</span>``();``    ``$right_arr` `= ``<span class="keyword">array</span>``();``    ``<span class="keyword">for</span>` `(``$i``=<span class="number">1</span>; ``$i``&lt;``count``(``$array``); ``$i``++)&#123;``        ``<span class="keyword">if</span>` `(``$array``[``$i``] &lt;= ``$key``)``            ``$left_arr``[] = ``$array``[``$i``];``        ``<span class="keyword">else</span>``            ``$right_arr``[] = ``$array``[``$i``];``    ``&#125;``    ``$left_arr` `= quick_sort(``$left_arr``);``    ``$right_arr` `= quick_sort(``$right_arr``);``    ``<span class="keyword">return</span>` `array_merge``(``$left_arr``, ``<span class="keyword">array</span>``(``$key``), ``$right_arr``);``&#125;`</span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">quick_sort</span><span class="params">($array)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (count($array) &lt;= <span class="number">1</span>) <span class="keyword">return</span> $array;</span><br><span class="line">    $key = $array[<span class="number">0</span>];</span><br><span class="line">    $left_arr = <span class="keyword">array</span>();</span><br><span class="line">    $right_arr = <span class="keyword">array</span>();</span><br><span class="line">    <span class="keyword">for</span> ($i=<span class="number">1</span>; $i&lt;count($array); $i++)&#123;</span><br><span class="line">        <span class="keyword">if</span> ($array[$i] &lt;= $key)</span><br><span class="line">            $left_arr[] = $array[$i];</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            $right_arr[] = $array[$i];</span><br><span class="line">    &#125;</span><br><span class="line">    $left_arr = quick_sort($left_arr);</span><br><span class="line">    $right_arr = quick_sort($right_arr);</span><br><span class="line">    <span class="keyword">return</span> array_merge($left_arr, <span class="keyword">array</span>($key), $right_arr);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><strong>3、请说明 PHP 中传值与传引用的区别，什么时候传值什么时候传引用?</strong></p>
 <p>按值传递：函数范围内对值的任何改变在函数外部都会被忽略</p>
@@ -181,14 +181,14 @@
 <p>arsort() - 根据值，以降序对关联数组进行排序</p>
 <p>krsort() - 根据键，以降序对关联数组进行排序</p>
 <p><strong>21、建立索引</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`(普通索引)-&gt;``创建:CREATE INDEX &lt;索引名&gt; ON tablename (索引字段)``修改:ALTER TABLE tablename ADD INDEX [索引名] (索引字段)``创表指定索引:CREATE TABLE tablename([...],INDEX[索引名](索引字段))``(唯一索引)-&gt;``创建:CREATE UNIQUE &lt;索引名&gt; ON tablename (索引字段)``修改:ALTER TABLE tablename ADD UNIQUE [索引名] (索引字段)``创表指定索引:CREATE TABLE tablename([...],UNIQUE[索引名](索引字段))``(主键)-&gt;``它是唯一索引,一般在创建表是建立,格式为:``CREATA TABLE tablename ([...],PRIMARY KEY[索引字段])`</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">(普通索引)-&gt;</span><br><span class="line">创建:CREATE INDEX &lt;索引名&gt; ON tablename (索引字段)</span><br><span class="line">修改:ALTER TABLE tablename ADD INDEX [索引名] (索引字段)</span><br><span class="line">创表指定索引:CREATE TABLE tablename([...],INDEX[索引名](索引字段))</span><br><span class="line">(唯一索引)-&gt;</span><br><span class="line">创建:CREATE UNIQUE &lt;索引名&gt; ON tablename (索引字段)</span><br><span class="line">修改:ALTER TABLE tablename ADD UNIQUE [索引名] (索引字段)</span><br><span class="line">创表指定索引:CREATE TABLE tablename([...],UNIQUE[索引名](索引字段))</span><br><span class="line">(主键)-&gt;</span><br><span class="line">它是唯一索引,一般在创建表是建立,格式为:</span><br><span class="line">CREATA TABLE tablename ([...],PRIMARY KEY[索引字段])</span><br></pre></td></tr></table></figure>
 
 <p><strong>22、PHP支持多继承吗？</strong></p>
 <p>不支持。PHP中只允许单继承，父类可以被一个子类用关键字“extends”继承。</p>
 <p><strong>23、使用过Memcache缓存吗，如果使用过，能够简单的描述一下它的工作原理吗？</strong></p>
 <p>Memcahce是把所有的数据保存在内存当中，采用hash表的方式，每条数据又key和value组成，每个key是独一无二的，当要访问某个值的时候先按照找到值，然后返回结果。<br>Memcahce采用LRU算法来逐渐把过期数据清除掉。</p>
 <p><strong>24、优化MYSQL数据库的方法</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`（1）选择最有效率的表名顺序``（2）WHERE子句中的连接顺序``（3）SELECT子句中避免使用‘*’``（4）用Where子句替换HAVING子句``（5）通过内部函数提高SQL效率``（6）避免在索引列上使用计算。``（7）提高GROUP BY 语句的效率, 可以通过将不需要的记录在GROUP BY 之前过滤掉。` `(1).选取最适用的字段属性,应该尽量把字段设置为NOT NULL``(2).使用连接（JOIN）来代替子查询(Sub-Queries)``(3).使用联合(UNION)来代替手动创建的临时表``(4).尽量少使用 LIKE 关键字和通配符``(5).使用事务和外键`</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">（1）选择最有效率的表名顺序</span><br><span class="line">（2）WHERE子句中的连接顺序</span><br><span class="line">（3）SELECT子句中避免使用‘*’</span><br><span class="line">（4）用Where子句替换HAVING子句</span><br><span class="line">（5）通过内部函数提高SQL效率</span><br><span class="line">（6）避免在索引列上使用计算。</span><br><span class="line">（7）提高GROUP BY 语句的效率, 可以通过将不需要的记录在GROUP BY 之前过滤掉。</span><br><span class="line"> </span><br><span class="line">(1).选取最适用的字段属性,应该尽量把字段设置为NOT NULL</span><br><span class="line">(2).使用连接（JOIN）来代替子查询(Sub-Queries)</span><br><span class="line">(3).使用联合(UNION)来代替手动创建的临时表</span><br><span class="line">(4).尽量少使用 LIKE 关键字和通配符</span><br><span class="line">(5).使用事务和外键</span><br></pre></td></tr></table></figure>
 
 <p><strong>25、MySQL主从备份的原理？</strong></p>
 <p>mysql支持单向、异步复制，复制过程中一个服务器充当主服务器，而一个或多个其它服务器充当从服务器。</p>
@@ -197,7 +197,7 @@
 <p><strong>27、如何修改session的生存时间</strong></p>
 <p>在php.ini 中设置 session.gc_maxlifetime = 1440 //默认时间</p>
 <p>代码实现</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`$lifeTime` `= 24 * 3600;  ``// 保存一天 ``session_set_cookie_params(``$lifeTime``); ``session_start();`</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$lifeTime = 24 * 3600;  // 保存一天 </span><br><span class="line">session_set_cookie_params($lifeTime); </span><br><span class="line">session_start();</span><br></pre></td></tr></table></figure>
 
 <p><strong>28、常见的 PHP 安全性攻击</strong></p>
 <p><strong>SQL注入</strong>：用户利用在表单字段输入SQL语句的方式来影响正常的SQL执行。<br><strong>防止</strong>：</p>
@@ -217,7 +217,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/01/14/%E3%80%90%E9%9D%A2%E8%AF%95%E3%80%91%201.php%E9%9D%A2%E8%AF%95%EF%BC%88%E4%B8%80%EF%BC%89/" data-id="ck5dnew3r0007mcts8jc78c7b" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/01/14/%E3%80%90%E9%9D%A2%E8%AF%95%E3%80%91%201.php%E9%9D%A2%E8%AF%95%EF%BC%88%E4%B8%80%EF%BC%89/" data-id="ck5dnjjlp0008qgts0flidzlu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -391,7 +391,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/13/%E3%80%90%E8%BF%90%E7%BB%B4%E3%80%91%201.%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/" data-id="ck5dnew4l0008mctserouh43p" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/13/%E3%80%90%E8%BF%90%E7%BB%B4%E3%80%91%201.%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/" data-id="ck5dnjjlb0007qgtscbwadzv2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -923,7 +923,7 @@ leave类似于java中的break语句，跳出所在循环！！！</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/07/%E3%80%90mysql%E3%80%91%202.mysql%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8(%E5%85%A8)/" data-id="ck5dnew3p0006mcts8xcd5ow7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/07/%E3%80%90mysql%E3%80%91%202.mysql%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8(%E5%85%A8)/" data-id="ck5dnjjmb0009qgts80crg6v6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -973,7 +973,7 @@ leave类似于java中的break语句，跳出所在循环！！！</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/06/%E3%80%90mysql%E3%80%91%201.mysql%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8/" data-id="ck5dnew070000mctsbu89a4ij" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/06/%E3%80%90mysql%E3%80%91%201.mysql%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8/" data-id="ck5dnjjkq0000qgts85cb1ie6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1059,7 +1059,7 @@ leave类似于java中的break语句，跳出所在循环！！！</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/05/%E3%80%90PyQt5%E3%80%91%201.PyQt5%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/" data-id="ck5dnew0m0003mctsf8j7ec5i" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/05/%E3%80%90PyQt5%E3%80%91%201.PyQt5%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0/" data-id="ck5dnjjla0006qgts6kyg3lnp" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1107,7 +1107,7 @@ leave类似于java中的break语句，跳出所在循环！！！</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/05/%E3%80%90python%E3%80%91%201.%E4%BD%BF%E7%94%A8%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E9%A1%B9%E7%9B%AE/" data-id="ck5dnew0i0001mcts7te1ak67" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/05/%E3%80%90python%E3%80%91%201.%E4%BD%BF%E7%94%A8%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E9%A1%B9%E7%9B%AE/" data-id="ck5dnjjl40002qgts4ujxg7ni" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1197,7 +1197,7 @@ leave类似于java中的break语句，跳出所在循环！！！</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/04/%E3%80%90php%E3%80%91%201.%E5%9C%A8CentOS%E4%B8%8A%E6%90%AD%E5%BB%BALNMP%E7%8E%AF%E5%A2%83/" data-id="ck5dnew0r0004mcts5n0ydr67" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/04/%E3%80%90php%E3%80%91%201.%E5%9C%A8CentOS%E4%B8%8A%E6%90%AD%E5%BB%BALNMP%E7%8E%AF%E5%A2%83/" data-id="ck5dnjjl10001qgts2r7q5i9j" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1371,7 +1371,7 @@ leave类似于java中的break语句，跳出所在循环！！！</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/17/%E3%80%90svn%E3%80%91%201.CentOS7%20%E7%9A%84svn%E7%AE%80%E5%8D%95%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/" data-id="ck5dnew1m0005mcts4f763k7s" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/17/%E3%80%90svn%E3%80%91%201.CentOS7%20%E7%9A%84svn%E7%AE%80%E5%8D%95%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/" data-id="ck5dnjjl80005qgts71ut4zse" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1423,7 +1423,7 @@ leave类似于java中的break语句，跳出所在循环！！！</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/12/%E3%80%90scrapy%E3%80%91%202.scrapy%E8%BF%9B%E9%98%B6%E5%AD%A6%E4%B9%A0%E4%B9%8B%E9%9A%8F%E6%9C%BA%E8%AF%B7%E6%B1%82%E5%A4%B4%E3%80%81%E9%9A%8F%E6%9C%BA%E4%BB%A3%E7%90%86%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BC%82%E6%AD%A5%E5%AD%98%E5%82%A8/" data-id="ck5dnew4m0009mctserlod8wh" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/12/%E3%80%90scrapy%E3%80%91%202.scrapy%E8%BF%9B%E9%98%B6%E5%AD%A6%E4%B9%A0%E4%B9%8B%E9%9A%8F%E6%9C%BA%E8%AF%B7%E6%B1%82%E5%A4%B4%E3%80%81%E9%9A%8F%E6%9C%BA%E4%BB%A3%E7%90%86%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BC%82%E6%AD%A5%E5%AD%98%E5%82%A8/" data-id="ck5dnjjl70004qgts1yyv1he9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1476,7 +1476,7 @@ leave类似于java中的break语句，跳出所在循环！！！</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/11/12/%E3%80%90scrapy%E3%80%91%201.%E4%BD%BF%E7%94%A8scrapy%E6%A1%86%E6%9E%B6%E9%AB%98%E6%95%88%E7%88%AC%E5%8F%96%E6%B1%BD%E8%BD%A6%E4%B9%8B%E5%AE%B6%E5%9B%BE%E7%89%87/" data-id="ck5dnew0k0002mcts05hi8uj1" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/11/12/%E3%80%90scrapy%E3%80%91%201.%E4%BD%BF%E7%94%A8scrapy%E6%A1%86%E6%9E%B6%E9%AB%98%E6%95%88%E7%88%AC%E5%8F%96%E6%B1%BD%E8%BD%A6%E4%B9%8B%E5%AE%B6%E5%9B%BE%E7%89%87/" data-id="ck5dnjjl50003qgtsgo0632th" class="article-share-link">Share</a>
       
       
     </footer>
